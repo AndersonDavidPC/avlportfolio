@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/anderson/(.*)",
+      "destination": "https://portfolio-anderson-patinos-projects.vercel.app/$1"
+    }
+  ]
+}
