@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -11,7 +11,7 @@
   "dependencies": {
     "@astrojs/react": "^4.2.1",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-brands-svg-icons": "6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "6.4.0",
     "@fortawesome/react-fontawesome": "0.2.0",
     "astro": "^5.5.2",

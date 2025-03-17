@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
 ---
 
 <!doctype html>
@@ -8,11 +10,24 @@ import '../styles/global.css';
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>AVL Asesorías</title>
+		<meta name="generator" content={Astro.generator} /> <!-- Generador de la página -->
+		<meta name="description" content="AVL Asesorías - Servicios profesionales de asesoría académica para estudiantes de colegio, universidad y desarrollo de tesis" />
+		<meta name="keywords" content="asesoría académica, tutoría, tesis, proyectos de grado, trabajos universitarios, tareas escolares, investigación" />
+		<meta name="author" content="AVL Asesorías" />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content="AVL Asesorías - Servicios profesionales de asesoría académica" />
+		<meta property="og:description" content="Servicios integrales de asesoría académica, desarrollo de tesis y proyectos para estudiantes" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="/og-image.jpg" />
+		<meta name="twitter:card" content="summary_large_image" /> <!-- Tipo de tarjeta de Twitter -->
+		<meta name="twitter:title" content="AVL Asesorías" /> <!-- Título de la página para Twitter -->
+		<meta name="twitter:description" content="Servicios profesionales de asesoría académica y desarrollo de tesis" /> <!-- Descripción de la página para Twitter -->
+		<title>AVL Asesorías Académicas</title>
 	</head>
 	<body>
+		<Header />
 		<slot />
+		<Footer />
 	</body>
 </html>
 
