@@ -1,0 +1,135 @@
+
+---
+export interface Props {
+  tabs: Array<{
+    id: string;
+    label: string;
+    active?: boolean;
+  }>;
+  variant?: 'default' | 'pills' | 'underline';
+}
+
+const { tabs, variant = 'default' } = Astro.props;
+---
+
+<div class="tabs-container" data-variant={variant}>
+  <!-- Tab Navigation -->
+  <div class={`tabs-nav ${
+    variant === 'pills' 
+      ? 'flex flex-wrap gap-2 bg-neutral-100 p-1 rounded-lg' 
+      : variant === 'underline'
+      ? 'flex border-b border-neutral-200'
+      : 'flex bg-white rounded-lg shadow-sm border border-neutral-200'
+  }`}>
+    {tabs.map((tab, index) => (
+      <button
+        class={`tab-button transition-all duration-300 ${
+          variant === 'pills'
+            ? 'px-4 py-2 rounded-md font-medium text-sm flex-1 min-w-0'
+            : variant === 'underline'
+            ? 'px-6 py-4 font-medium text-sm relative border-b-2 border-transparent hover:border-primary-300 hover:text-primary-600'
+            : 'px-6 py-3 font-medium text-sm flex-1 min-w-0 first:rounded-l-lg last:rounded-r-lg border-r border-neutral-200 last:border-r-0'
+        } ${tab.active 
+          ? variant === 'pills'
+            ? 'bg-primary-600 text-white shadow-sm'
+            : variant === 'underline'
+            ? 'text-primary-600 border-primary-600'
+            : 'bg-primary-50 text-primary-600 border-primary-100'
+          : variant === 'pills'
+            ? 'text-neutral-600 hover:text-neutral-800 hover:bg-white/50'
+            : 'text-neutral-600 hover:text-neutral-800 hover:bg-neutral-50'
+        }`}
+        data-tab={tab.id}
+        aria-selected={tab.active}
+        role="tab"
+      >
+        {tab.label}
+
+        {/* Underline indicator for underline variant */}
+        {variant === 'underline' && tab.active && (
+          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent"></span>
+        )}
+      </button>
+    ))}
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tabs-content mt-6">
+    <slot />
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabContainers = document.querySelectorAll('.tabs-container');
+
+    tabContainers.forEach(container => {
+      const tabButtons = container.querySelectorAll('.tab-button');
+      const tabPanels = container.querySelectorAll('.tab-panel');
+      const variant = container.dataset.variant;
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const targetTab = this.dataset.tab;
+
+          // Remove active states
+          tabButtons.forEach(btn => {
+            if (variant === 'pills') {
+              btn.classList.remove('bg-primary-600', 'text-white', 'shadow-sm');
+            } else if (variant === 'underline') {
+              btn.classList.remove('text-primary-600', 'border-primary-600');
+            } else {
+              btn.classList.remove('bg-primary-50', 'text-primary-600', 'border-primary-100');
+            }
+
+            if (variant === 'pills') {
+              btn.classList.add('text-neutral-600', 'hover:text-neutral-800', 'hover:bg-white/50');
+            } else {
+              btn.classList.add('text-neutral-600', 'hover:text-neutral-800', 'hover:bg-neutral-50');
+            }
+
+            btn.setAttribute('aria-selected', 'false');
+
+            // Remove underline indicator
+            if (variant === 'underline') {
+              const indicator = btn.querySelector('span');
+              if (indicator) indicator.remove();
+            }
+          });
+
+          // Add active state to clicked button
+          this.classList.remove('text-neutral-600', 'hover:text-neutral-800', 'hover:bg-neutral-50', 'hover:bg-white/50');
+
+          if (variant === 'pills') {
+            this.classList.add('bg-primary-600', 'text-white', 'shadow-sm');
+          } else if (variant === 'underline') {
+            this.classList.add('text-primary-600', 'border-primary-600');
+            // Add underline indicator
+            const indicator = document.createElement('span');
+            indicator.className = 'absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent';
+            this.appendChild(indicator);
+          } else {
+            this.classList.add('bg-primary-50', 'text-primary-600', 'border-primary-100');
+          }
+
+          this.setAttribute('aria-selected', 'true');
+
+          // Hide all panels
+          tabPanels.forEach(panel => {
+            panel.classList.add('hidden');
+            panel.classList.remove('animate-fade-in');
+          });
+
+          // Show target panel
+          const targetPanel = container.querySelector(`[data-tab-content="${targetTab}"]`);
+          if (targetPanel) {
+            targetPanel.classList.remove('hidden');
+            setTimeout(() => {
+              targetPanel.classList.add('animate-fade-in');
+            }, 10);
+          }
+        });
+      });
+    });
+  });
+</script>

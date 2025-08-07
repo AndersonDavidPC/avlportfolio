@@ -1,0 +1,169 @@
+
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  ctaText?: string;
+  ctaUrl?: string;
+  backgroundImage?: string;
+  variant?: 'default' | 'gradient' | 'image';
+}
+
+const { 
+  title, 
+  subtitle, 
+  description, 
+  ctaText = "Contáctanos", 
+  ctaUrl = "#contacto",
+  backgroundImage,
+  variant = 'default'
+} = Astro.props;
+---
+
+<section class={`relative overflow-hidden ${
+  variant === 'gradient' 
+    ? 'bg-gradient-to-br from-primary-600 via-primary-700 to-accent' 
+    : variant === 'image' 
+    ? 'bg-neutral-900' 
+    : 'bg-white'
+} ${variant === 'default' ? 'text-neutral-800' : 'text-white'}`}>
+
+  <!-- Background Image -->
+  {variant === 'image' && backgroundImage && (
+    <div class="absolute inset-0">
+      <img 
+        src={backgroundImage} 
+        alt="" 
+        class="w-full h-full object-cover opacity-30"
+      />
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-900/80 to-neutral-900/80"></div>
+    </div>
+  )}
+
+  <!-- Decorative Elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full opacity-20 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/20 rounded-full opacity-20 blur-3xl"></div>
+  </div>
+
+  <div class="container-custom relative z-10">
+    <div class="min-h-[80vh] flex items-center">
+      <div class="grid lg:grid-cols-2 gap-12 items-center w-full">
+
+        <!-- Content -->
+        <div class="space-y-8 text-center lg:text-left">
+          {subtitle && (
+            <div class="inline-block">
+              <span class={`px-4 py-2 rounded-full text-sm font-medium ${
+                variant === 'default' 
+                  ? 'bg-primary-100 text-primary-700' 
+                  : 'bg-white/20 text-white backdrop-blur-sm'
+              }`}>
+                {subtitle}
+              </span>
+            </div>
+          )}
+
+          <h1 class={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ${
+            variant === 'default' ? 'text-gradient' : ''
+          }`}>
+            {title}
+          </h1>
+
+          {description && (
+            <p class={`text-xl leading-relaxed max-w-2xl ${
+              variant === 'default' ? 'text-neutral-600' : 'text-white/90'
+            }`}>
+              {description}
+            </p>
+          )}
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a 
+              href={ctaUrl}
+              class={`btn ${variant === 'default' ? 'btn-primary' : 'btn-secondary bg-white text-primary-700 hover:bg-neutral-100'} text-lg px-8 py-4`}
+            >
+              {ctaText}
+            </a>
+
+            <a 
+              href="/servicios"
+              class={`btn ${variant === 'default' ? 'btn-outline' : 'btn-outline border-white text-white hover:bg-white hover:text-primary-700'} text-lg px-8 py-4`}
+            >
+              Ver Servicios
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Image/SVG -->
+        <div class="relative">
+          <div class="relative z-10 max-w-lg mx-auto lg:max-w-none">
+            <svg class="w-full h-auto drop-shadow-2xl float-animation" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background Circle -->
+              <circle cx="200" cy="150" r="140" fill="url(#grad1)" opacity="0.1"/>
+
+              <!-- Book -->
+              <rect x="120" y="100" width="160" height="100" rx="8" fill="#ffffff" stroke="url(#grad1)" stroke-width="2"/>
+              <rect x="130" y="110" width="140" height="4" fill="url(#grad1)" opacity="0.3"/>
+              <rect x="130" y="120" width="120" height="3" fill="url(#grad1)" opacity="0.5"/>
+              <rect x="130" y="130" width="100" height="3" fill="url(#grad1)" opacity="0.5"/>
+              <rect x="130" y="140" width="80" height="3" fill="url(#grad1)" opacity="0.5"/>
+
+              <!-- Graduation Cap -->
+              <polygon points="180,80 220,80 210,60 190,60" fill="url(#grad1)"/>
+              <rect x="175" y="75" width="50" height="8" fill="url(#grad1)"/>
+              <circle cx="225" cy="79" r="2" fill="#ff006e"/>
+
+              <!-- Decorative Elements -->
+              <circle cx="320" cy="80" r="8" fill="url(#grad1)" opacity="0.6"/>
+              <circle cx="340" cy="120" r="6" fill="#ff006e" opacity="0.8"/>
+              <circle cx="80" cy="100" r="5" fill="url(#grad1)" opacity="0.7"/>
+              <circle cx="60" cy="140" r="7" fill="#ff006e" opacity="0.6"/>
+
+              <!-- Sparkles -->
+              <path d="M300 60 L305 70 L315 65 L305 75 L300 85 L295 75 L285 65 L295 70 Z" fill="#ffd700"/>
+              <path d="M100 200 L103 206 L109 203 L103 209 L100 215 L97 209 L91 203 L97 206 Z" fill="#ffd700"/>
+
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#dc4dff;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Floating Cards -->
+          <div class="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-4 max-w-xs hidden lg:block animation-delay-200 animate-fade-in">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-neutral-800">98% Satisfacción</p>
+                <p class="text-sm text-neutral-600">Estudiantes satisfechos</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-4 max-w-xs hidden lg:block animation-delay-400 animate-fade-in">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-neutral-800">500+ Estudiantes</p>
+                <p class="text-sm text-neutral-600">Ya confían en nosotros</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

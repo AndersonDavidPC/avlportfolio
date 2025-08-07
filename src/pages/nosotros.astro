@@ -1,0 +1,335 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+import Banner from '../components/Banner.astro';
+import TeamList from '../components/TeamList.astro';
+
+const teamMembers = [
+  {
+    name: "Andrea Vargas",
+    role: "Ingeniera Civil - Especialista en Matemáticas",
+    bio: "Graduada con honores, especializada en cálculo diferencial e integral, álgebra lineal y física aplicada.",
+    social: {
+      email: "andrea@avlasesorias.com",
+      linkedin: "https://linkedin.com/in/andrea-vargas"
+    }
+  },
+  {
+    name: "Luis Miguel Torres",
+    role: "Ingeniero de Sistemas - Especialista en Programación",
+    bio: "Experto en programación, algoritmos, estructuras de datos y matemáticas discretas.",
+    social: {
+      email: "luis@avlasesorias.com",
+      linkedin: "https://linkedin.com/in/luis-torres"
+    }
+  },
+  {
+    name: "Valentina Ruiz",
+    role: "Licenciada en Humanidades - Especialista en Redacción",
+    bio: "Especialista en redacción académica, comprensión lectora, filosofía y ciencias sociales.",
+    social: {
+      email: "valentina@avlasesorias.com",
+      linkedin: "https://linkedin.com/in/valentina-ruiz"
+    }
+  }
+];
+
+const socialContributions = [
+  {
+    title: "Programa de Becas",
+    description: "Ofrecemos 10 becas mensuales para estudiantes de bajos recursos económicos.",
+    year: "2023 - Presente"
+  },
+  {
+    title: "Talleres Gratuitos",
+    description: "Dictamos talleres de metodología de estudio en colegios públicos de Cúcuta.",
+    year: "2023"
+  },
+  {
+    title: "Material Educativo",
+    description: "Creamos y distribuimos gratuitamente guías de estudio digitales.",
+    year: "2023 - Presente"
+  },
+  {
+    title: "Apoyo a Universitarios",
+    description: "Mentorías gratuitas para estudiantes de primer semestre universitario.",
+    year: "2023"
+  }
+];
+---
+
+<Layout 
+  title="Nosotros - AVL Asesorías" 
+  description="Conoce al equipo de profesionales de AVL Asesorías. Ingenieros y especialistas comprometidos con la excelencia académica en Cúcuta."
+>
+  <!-- Hero Section -->
+  <Banner
+    title="Conoce Nuestro Equipo"
+    subtitle="👥 Profesionales Comprometidos"
+    description="Un equipo de profesionales recién egresados con pasión por la enseñanza y el compromiso de transformar el futuro académico de nuestros estudiantes."
+    variant="default"
+  />
+
+  <!-- Team Section -->
+  <section class="section-padding bg-white">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gradient mb-4">
+          Nuestro Equipo de Especialistas
+        </h2>
+        <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+          Profesionales recién egresados con formación de excelencia y experiencia práctica 
+          en sus áreas de especialización, comprometidos con tu éxito académico.
+        </p>
+      </div>
+
+      <TeamList members={teamMembers} columns={3} />
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="section-padding bg-gradient-to-br from-primary-50 to-neutral-50">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-neutral-800 mb-4">
+            Contáctanos
+          </h2>
+          <p class="text-xl text-neutral-600">
+            ¿Listo para comenzar? Escríbenos y te contactaremos para coordinar tu primera sesión.
+          </p>
+        </div>
+
+        <div class="card p-8 lg:p-12">
+          <form class="grid md:grid-cols-2 gap-6" action="#" method="POST">
+            <div class="space-y-2">
+              <label for="name" class="block text-sm font-medium text-neutral-700">
+                Nombre Completo *
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-colors"
+                placeholder="Tu nombre completo"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <label for="email" class="block text-sm font-medium text-neutral-700">
+                Correo Electrónico *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-colors"
+                placeholder="tu@email.com"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <label for="phone" class="block text-sm font-medium text-neutral-700">
+                Teléfono *
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-colors"
+                placeholder="+57 300 123 4567"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <label for="level" class="block text-sm font-medium text-neutral-700">
+                Nivel Académico *
+              </label>
+              <select
+                id="level"
+                name="level"
+                required
+                class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-colors"
+              >
+                <option value="">Selecciona tu nivel</option>
+                <option value="secundaria">Secundaria</option>
+                <option value="universidad">Universidad</option>
+                <option value="emprendedor">Emprendedor</option>
+                <option value="empresa">Empresa</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-2 space-y-2">
+              <label for="subject" class="block text-sm font-medium text-neutral-700">
+                Materia o Área de Interés *
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-colors"
+                placeholder="Ej: Cálculo, Física, Programación, Redacción..."
+              />
+            </div>
+
+            <div class="md:col-span-2 space-y-2">
+              <label for="modality" class="block text-sm font-medium text-neutral-700">
+                Modalidad Preferida *
+              </label>
+              <div class="grid grid-cols-2 gap-4">
+                <label class="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="modality"
+                    value="presencial"
+                    class="text-primary-600 focus:ring-primary-500 focus:ring-2"
+                  />
+                  <span class="text-neutral-700">Presencial (Cúcuta)</span>
+                </label>
+                <label class="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="modality"
+                    value="virtual"
+                    class="text-primary-600 focus:ring-primary-500 focus:ring-2"
+                  />
+                  <span class="text-neutral-700">Virtual</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="md:col-span-2 space-y-2">
+              <label for="message" class="block text-sm font-medium text-neutral-700">
+                Mensaje Adicional
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-colors resize-none"
+                placeholder="Cuéntanos más sobre tus necesidades académicas..."
+              ></textarea>
+            </div>
+
+            <div class="md:col-span-2">
+              <button
+                type="submit"
+                class="w-full btn btn-primary text-lg py-4"
+              >
+                Enviar Mensaje
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Team CTA -->
+  <section class="section-padding bg-white">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold text-neutral-800 mb-6">
+          ¿Quieres Ser Parte del Equipo?
+        </h2>
+
+        <p class="text-xl text-neutral-600 mb-8">
+          Si eres un profesional recién egresado con pasión por la enseñanza, 
+          nos encantaría conocerte y explorar oportunidades de colaboración.
+        </p>
+
+        <div class="bg-gradient-to-r from-primary-50 to-accent/10 rounded-2xl p-8 lg:p-12">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="space-y-4 text-left">
+              <h3 class="text-2xl font-semibold text-neutral-800">
+                Buscamos profesionales que:
+              </h3>
+              <ul class="space-y-3 text-neutral-600">
+                <li class="flex items-center space-x-3">
+                  <svg class="w-5 h-5 text-primary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Sean recién egresados (máximo 2 años)</span>
+                </li>
+                <li class="flex items-center space-x-3">
+                  <svg class="w-5 h-5 text-primary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Tengan excelencia académica</span>
+                </li>
+                <li class="flex items-center space-x-3">
+                  <svg class="w-5 h-5 text-primary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Disfruten enseñar y compartir conocimiento</span>
+                </li>
+                <li class="flex items-center space-x-3">
+                  <svg class="w-5 h-5 text-primary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Se comprometan con la calidad educativa</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-center">
+              <a 
+                href="mailto:empleo@avlasesorias.com" 
+                class="btn btn-primary text-lg px-8 py-4"
+              >
+                Enviar CV
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Contributions -->
+  <section class="section-padding bg-gradient-to-br from-neutral-900 to-neutral-800 text-white">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+          Nuestros Aportes Sociales
+        </h2>
+        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+          Creemos en la educación como motor de transformación social. 
+          Estos son algunos de nuestros programas de impacto comunitario.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {socialContributions.map((contribution, index) => (
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 lg:p-8 hover-lift">
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-xl font-semibold text-white">
+                    {contribution.title}
+                  </h3>
+                  <span class="text-sm text-primary-300 font-medium">
+                    {contribution.year}
+                  </span>
+                </div>
+                <p class="text-neutral-300 leading-relaxed">
+                  {contribution.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
