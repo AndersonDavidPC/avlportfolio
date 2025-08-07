@@ -1,0 +1,544 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+import Banner from '../components/Banner.astro';
+import Tabs from '../components/Tabs.astro';
+
+const serviceTabs = [
+  { id: 'colegio', label: 'Colegio', active: true },
+  { id: 'universidad', label: 'Universidad' },
+  { id: 'emprendedores', label: 'Emprendedores' },
+  { id: 'empresas', label: 'Empresas' }
+];
+---
+
+<Layout 
+  title="Servicios - AVL Asesorías" 
+  description="Servicios especializados de AVL Asesorías: asesorías para colegio, universidad, emprendedores y empresas. Modalidad presencial y virtual."
+>
+  <!-- Hero Section -->
+  <Banner
+    title="Nuestros Servicios Especializados"
+    subtitle="🎯 Soluciones Académicas"
+    description="Ofrecemos asesorías académicas personalizadas para cada etapa educativa y profesional, adaptadas a tus necesidades específicas."
+    variant="gradient"
+  />
+
+  <!-- Services Tabs Section -->
+  <section class="section-padding bg-white">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gradient mb-4">
+          Elige tu Categoría de Servicio
+        </h2>
+        <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+          Cada servicio está diseñado específicamente para las necesidades 
+          y desafíos únicos de cada etapa académica y profesional.
+        </p>
+      </div>
+
+      <Tabs tabs={serviceTabs} variant="pills">
+        <!-- Colegio Tab Content -->
+        <div class="tab-panel" data-tab-content="colegio">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+              <h3 class="text-2xl font-bold text-neutral-800">
+                Asesorías para Estudiantes de Colegio
+              </h3>
+
+              <p class="text-lg text-neutral-600 leading-relaxed">
+                Apoyo especializado para estudiantes de bachillerato en las materias más desafiantes, 
+                preparándolos para el éxito académico y la transición a la educación superior.
+              </p>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-primary-50 rounded-lg p-4">
+                  <h4 class="font-semibold text-neutral-800 mb-2">Matemáticas</h4>
+                  <ul class="text-sm text-neutral-600 space-y-1">
+                    <li>• Álgebra y Geometría</li>
+                    <li>• Trigonometría</li>
+                    <li>• Pre-cálculo</li>
+                  </ul>
+                </div>
+
+                <div class="bg-primary-50 rounded-lg p-4">
+                  <h4 class="font-semibold text-neutral-800 mb-2">Ciencias</h4>
+                  <ul class="text-sm text-neutral-600 space-y-1">
+                    <li>• Física básica</li>
+                    <li>• Química general</li>
+                    <li>• Biología</li>
+                  </ul>
+                </div>
+
+                <div class="bg-primary-50 rounded-lg p-4">
+                  <h4 class="font-semibold text-neutral-800 mb-2">Lenguaje</h4>
+                  <ul class="text-sm text-neutral-600 space-y-1">
+                    <li>• Comprensión lectora</li>
+                    <li>• Redacción</li>
+                    <li>• Literatura</li>
+                  </ul>
+                </div>
+
+                <div class="bg-primary-50 rounded-lg p-4">
+                  <h4 class="font-semibold text-neutral-800 mb-2">Preparación ICFES</h4>
+                  <ul class="text-sm text-neutral-600 space-y-1">
+                    <li>• Simulacros</li>
+                    <li>• Estrategias de examen</li>
+                    <li>• Repaso integral</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-r from-primary-100 to-accent/10 rounded-lg p-6">
+                <h4 class="font-semibold text-primary-800 mb-2">💰 Precios Especiales</h4>
+                <p class="text-primary-700 text-sm">
+                  Desde $25.000 COP por hora. Descuentos por paquetes de clases.
+                </p>
+              </div>
+            </div>
+
+            <div class="relative">
+              <svg class="w-full h-auto max-w-md mx-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- School building -->
+                <rect x="100" y="150" width="200" height="120" fill="#ffffff" stroke="url(#schoolGrad)" stroke-width="2"/>
+
+                <!-- Windows -->
+                <rect x="120" y="170" width="30" height="30" fill="url(#schoolGrad)" opacity="0.3"/>
+                <rect x="170" y="170" width="30" height="30" fill="url(#schoolGrad)" opacity="0.3"/>
+                <rect x="220" y="170" width="30" height="30" fill="url(#schoolGrad)" opacity="0.3"/>
+                <rect x="270" y="170" width="30" height="30" fill="url(#schoolGrad)" opacity="0.3"/>
+
+                <!-- Door -->
+                <rect x="180" y="220" width="40" height="50" fill="url(#schoolGrad)"/>
+
+                <!-- Roof -->
+                <polygon points="80,150 200,100 320,150" fill="url(#schoolGrad)"/>
+
+                <!-- Students -->
+                <circle cx="150" cy="250" r="8" fill="#10b981"/>
+                <circle cx="180" cy="250" r="8" fill="#10b981"/>
+                <circle cx="220" cy="250" r="8" fill="#10b981"/>
+                <circle cx="250" cy="250" r="8" fill="#10b981"/>
+
+                <!-- Books -->
+                <rect x="50" y="100" width="15" height="20" rx="2" fill="url(#schoolGrad)"/>
+                <rect x="330" y="120" width="15" height="20" rx="2" fill="url(#schoolGrad)"/>
+
+                <defs>
+                  <linearGradient id="schoolGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#dc4dff;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Universidad Tab Content -->
+        <div class="tab-panel hidden" data-tab-content="universidad">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+              <h3 class="text-2xl font-bold text-neutral-800">
+                Asesorías Universitarias Especializadas
+              </h3>
+
+              <p class="text-lg text-neutral-600 leading-relaxed">
+                Apoyo académico avanzado para estudiantes universitarios en materias complejas 
+                de ingeniería, ciencias exactas y áreas especializadas.
+              </p>
+
+              <div class="space-y-4">
+                <div class="border-l-4 border-primary-500 pl-6">
+                  <h4 class="font-semibold text-neutral-800 mb-2">🔧 Ingenierías</h4>
+                  <p class="text-neutral-600 text-sm">
+                    Cálculo diferencial e integral, álgebra lineal, ecuaciones diferenciales, 
+                    física mecánica, termodinámica, programación avanzada.
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-primary-500 pl-6">
+                  <h4 class="font-semibold text-neutral-800 mb-2">🧪 Ciencias Básicas</h4>
+                  <p class="text-neutral-600 text-sm">
+                    Química orgánica e inorgánica, biología molecular, estadística, 
+                    métodos numéricos, investigación científica.
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-primary-500 pl-6">
+                  <h4 class="font-semibent text-neutral-800 mb-2">📚 Humanidades</h4>
+                  <p class="text-neutral-600 text-sm">
+                    Metodología de investigación, redacción académica, análisis crítico, 
+                    tesis y proyectos de grado.
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-r from-blue-100 to-primary-100 rounded-lg p-6">
+                <h4 class="font-semibold text-blue-800 mb-2">🎓 Servicios Especiales</h4>
+                <ul class="text-blue-700 text-sm space-y-1">
+                  <li>• Preparación para exámenes parciales y finales</li>
+                  <li>• Asesoría en proyectos de investigación</li>
+                  <li>• Apoyo en tesis de grado</li>
+                  <li>• Talleres de metodología de estudio</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="relative">
+              <svg class="w-full h-auto max-w-md mx-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- University building -->
+                <rect x="50" y="120" width="300" height="150" fill="#ffffff" stroke="url(#uniGrad)" stroke-width="2"/>
+
+                <!-- Columns -->
+                <rect x="80" y="120" width="15" height="150" fill="url(#uniGrad)"/>
+                <rect x="120" y="120" width="15" height="150" fill="url(#uniGrad)"/>
+                <rect x="160" y="120" width="15" height="150" fill="url(#uniGrad)"/>
+                <rect x="200" y="120" width="15" height="150" fill="url(#uniGrad)"/>
+                <rect x="240" y="120" width="15" height="150" fill="url(#uniGrad)"/>
+                <rect x="280" y="120" width="15" height="150" fill="url(#uniGrad)"/>
+                <rect x="320" y="120" width="15" height="150" fill="url(#uniGrad)"/>
+
+                <!-- Steps -->
+                <rect x="50" y="260" width="300" height="10" fill="url(#uniGrad)" opacity="0.3"/>
+
+                <!-- Roof -->
+                <polygon points="30,120 200,80 370,120" fill="url(#uniGrad)"/>
+
+                <!-- Clock -->
+                <circle cx="200" cy="100" r="15" fill="#ffffff" stroke="url(#uniGrad)" stroke-width="2"/>
+
+                <!-- Graduation cap -->
+                <polygon points="150,50 170,50 160,35 150,35" fill="url(#uniGrad)"/>
+                <rect x="145" y="45" width="30" height="8" fill="url(#uniGrad)"/>
+
+                <defs>
+                  <linearGradient id="uniGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emprendedores Tab Content -->
+        <div class="tab-panel hidden" data-tab-content="emprendedores">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+              <h3 class="text-2xl font-bold text-neutral-800">
+                Mentorías para Emprendedores
+              </h3>
+
+              <p class="text-lg text-neutral-600 leading-relaxed">
+                Acompañamiento especializado para emprendedores que necesitan fortalecer 
+                conocimientos técnicos, académicos y de gestión para sus proyectos.
+              </p>
+
+              <div class="space-y-4">
+                <div class="card p-6">
+                  <h4 class="font-semibold text-neutral-800 mb-3 flex items-center">
+                    <span class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center mr-3">
+                      <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                      </svg>
+                    </span>
+                    Validación Técnica de Ideas
+                  </h4>
+                  <p class="text-neutral-600 text-sm">
+                    Análisis técnico de viabilidad, revisión de conceptos científicos 
+                    y matemáticos aplicados a tu emprendimiento.
+                  </p>
+                </div>
+
+                <div class="card p-6">
+                  <h4 class="font-semibold text-neutral-800 mb-3 flex items-center">
+                    <span class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center mr-3">
+                      <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                    </span>
+                    Planes de Negocio Técnicos
+                  </h4>
+                  <p class="text-neutral-600 text-sm">
+                    Desarrollo de la sección técnica de tu plan de negocios con 
+                    fundamentos científicos sólidos.
+                  </p>
+                </div>
+
+                <div class="card p-6">
+                  <h4 class="font-semibold text-neutral-800 mb-3 flex items-center">
+                    <span class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center mr-3">
+                      <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                      </svg>
+                    </span>
+                    Preparación para Convocatorias
+                  </h4>
+                  <p class="text-neutral-600 text-sm">
+                    Apoyo en la redacción técnica para postulación a fondos de inversión, 
+                    incubadoras y convocatorias gubernamentales.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative">
+              <svg class="w-full h-auto max-w-md mx-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Light bulb -->
+                <circle cx="200" cy="120" r="40" fill="url(#entrepreneurGrad)" opacity="0.8"/>
+                <rect x="185" y="160" width="30" height="20" fill="#ffffff" stroke="url(#entrepreneurGrad)" stroke-width="2"/>
+                <rect x="190" y="180" width="20" height="15" fill="url(#entrepreneurGrad)"/>
+
+                <!-- Sparks -->
+                <path d="M120 80 L125 90 L135 85 L125 95 L120 105 L115 95 L105 85 L115 90 Z" fill="#ffd700"/>
+                <path d="M280 70 L283 76 L289 73 L283 79 L280 85 L277 79 L271 73 L277 76 Z" fill="#ffd700"/>
+                <path d="M150 200 L153 206 L159 203 L153 209 L150 215 L147 209 L141 203 L147 206 Z" fill="#ffd700"/>
+
+                <!-- Rocket -->
+                <polygon points="320,180 330,160 340,180 335,185 325,185" fill="url(#entrepreneurGrad)"/>
+                <rect x="325" y="185" width="10" height="20" fill="url(#entrepreneurGrad)"/>
+                <polygon points="322,205 328,215 332,205" fill="#ff6b6b"/>
+                <polygon points="333,205 338,215 342,205" fill="#ff6b6b"/>
+
+                <!-- Graph -->
+                <rect x="50" y="200" width="100" height="80" fill="#ffffff" stroke="url(#entrepreneurGrad)" stroke-width="2"/>
+                <polyline points="60,270 70,250 80,240 90,220 100,200 110,210 120,190 130,180 140,170" 
+                          stroke="url(#entrepreneurGrad)" stroke-width="3" fill="none"/>
+
+                <defs>
+                  <linearGradient id="entrepreneurGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empresas Tab Content -->
+        <div class="tab-panel hidden" data-tab-content="empresas">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+              <h3 class="text-2xl font-bold text-neutral-800">
+                Servicios Corporativos
+              </h3>
+
+              <p class="text-lg text-neutral-600 leading-relaxed">
+                Programas de capacitación técnica y académica para empresas que buscan 
+                fortalecer las competencias de sus colaboradores.
+              </p>
+
+              <div class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div class="bg-gradient-to-br from-blue-50 to-primary-50 rounded-lg p-6">
+                    <h4 class="font-semibold text-neutral-800 mb-3">📈 Capacitación Técnica</h4>
+                    <ul class="text-sm text-neutral-600 space-y-2">
+                      <li>• Matemáticas aplicadas</li>
+                      <li>• Estadística empresarial</li>
+                      <li>• Análisis de datos</li>
+                      <li>• Programación básica</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-gradient-to-br from-green-50 to-primary-50 rounded-lg p-6">
+                    <h4 class="font-semibold text-neutral-800 mb-3">✍️ Comunicación</h4>
+                    <ul class="text-sm text-neutral-600 space-y-2">
+                      <li>• Redacción empresarial</li>
+                      <li>• Informes técnicos</li>
+                      <li>• Presentaciones efectivas</li>
+                      <li>• Comunicación científica</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="card p-6 bg-gradient-to-r from-neutral-50 to-primary-50">
+                  <h4 class="font-semibold text-neutral-800 mb-4">🎯 Modalidades de Servicio</h4>
+
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="text-center">
+                      <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-full flex items-center justify-center mx-auto mb-2">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                      </div>
+                      <h5 class="font-medium text-neutral-800">Talleres Grupales</h5>
+                      <p class="text-neutral-600">Hasta 20 participantes</p>
+                    </div>
+
+                    <div class="text-center">
+                      <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-full flex items-center justify-center mx-auto mb-2">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                      </div>
+                      <h5 class="font-medium text-neutral-800">Asesorías Individuales</h5>
+                      <p class="text-neutral-600">Enfoque personalizado</p>
+                    </div>
+
+                    <div class="text-center">
+                      <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-full flex items-center justify-center mx-auto mb-2">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                      </div>
+                      <h5 class="font-medium text-neutral-800">Virtual/Presencial</h5>
+                      <p class="text-neutral-600">Máxima flexibilidad</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-accent/10 to-primary-100 rounded-lg p-6">
+                  <h4 class="font-semibold text-primary-800 mb-2">💼 Solicita una Propuesta</h4>
+                  <p class="text-primary-700 text-sm mb-3">
+                    Desarrollamos programas personalizados según las necesidades específicas de tu empresa.
+                  </p>
+                  <a href="mailto:empresas@avlasesorias.com" class="text-primary-600 font-medium hover:text-primary-700">
+                    Contactar área comercial →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative">
+              <svg class="w-full h-auto max-w-md mx-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Building -->
+                <rect x="100" y="100" width="200" height="150" fill="#ffffff" stroke="url(#corpGrad)" stroke-width="2"/>
+
+                <!-- Windows grid -->
+                <rect x="120" y="120" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="155" y="120" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="190" y="120" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="225" y="120" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="260" y="120" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+
+                <rect x="120" y="155" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="155" y="155" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="190" y="155" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="225" y="155" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="260" y="155" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+
+                <rect x="120" y="190" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="155" y="190" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="190" y="190" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="225" y="190" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+                <rect x="260" y="190" width="25" height="25" fill="url(#corpGrad)" opacity="0.3"/>
+
+                <!-- Entry -->
+                <rect x="180" y="220" width="40" height="30" fill="url(#corpGrad)"/>
+
+                <!-- People icons -->
+                <circle cx="50" cy="200" r="8" fill="#10b981"/>
+                <circle cx="70" cy="220" r="8" fill="#10b981"/>
+                <circle cx="330" cy="180" r="8" fill="#10b981"/>
+                <circle cx="350" cy="200" r="8" fill="#10b981"/>
+
+                <!-- Chart -->
+                <rect x="50" y="50" width="80" height="60" fill="#ffffff" stroke="url(#corpGrad)" stroke-width="2"/>
+                <polyline points="60,100 70,85 80,75 90,65 100,55 110,60 120,50" 
+                          stroke="url(#corpGrad)" stroke-width="2" fill="none"/>
+
+                <defs>
+                  <linearGradient id="corpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </Tabs>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="section-padding bg-gradient-to-br from-primary-50 to-neutral-50">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-neutral-800 mb-4">
+          Nuestro Proceso de Trabajo
+        </h2>
+        <p class="text-xl text-neutral-600 max-w-2xl mx-auto">
+          Un método probado que garantiza resultados efectivos en cada sesión de asesoría.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="text-center space-y-4">
+          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent rounded-full flex items-center justify-center mx-auto">
+            <span class="text-white font-bold text-xl">1</span>
+          </div>
+          <h3 class="text-lg font-semibold text-neutral-800">Diagnóstico</h3>
+          <p class="text-neutral-600 text-sm">
+            Evaluamos tu nivel actual y identificamos áreas de mejora específicas.
+          </p>
+        </div>
+
+        <div class="text-center space-y-4">
+          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent rounded-full flex items-center justify-center mx-auto">
+            <span class="text-white font-bold text-xl">2</span>
+          </div>
+          <h3 class="text-lg font-semibold text-neutral-800">Planificación</h3>
+          <p class="text-neutral-600 text-sm">
+            Diseñamos un plan de estudios personalizado según tus objetivos.
+          </p>
+        </div>
+
+        <div class="text-center space-y-4">
+          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent rounded-full flex items-center justify-center mx-auto">
+            <span class="text-white font-bold text-xl">3</span>
+          </div>
+          <h3 class="text-lg font-semibold text-neutral-800">Implementación</h3>
+          <p class="text-neutral-600 text-sm">
+            Sesiones de asesoría enfocadas con metodologías probadas.
+          </p>
+        </div>
+
+        <div class="text-center space-y-4">
+          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent rounded-full flex items-center justify-center mx-auto">
+            <span class="text-white font-bold text-xl">4</span>
+          </div>
+          <h3 class="text-lg font-semibold text-neutral-800">Seguimiento</h3>
+          <p class="text-neutral-600 text-sm">
+            Monitoreo continuo del progreso y ajustes según sea necesario.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-padding bg-white">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl lg:text-4xl font-bold text-neutral-800 mb-6">
+        ¿Listo para Comenzar?
+      </h2>
+
+      <p class="text-xl text-neutral-600 mb-8 max-w-2xl mx-auto">
+        Contáctanos para agendar tu primera sesión de asesoría y descubre 
+        cómo podemos ayudarte a alcanzar tus objetivos académicos.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="https://wa.me/573001234567" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-primary text-lg px-8 py-4"
+        >
+          Agendar Sesión
+        </a>
+
+        <a 
+          href="/nosotros#contacto" 
+          class="btn btn-outline text-lg px-8 py-4"
+        >
+          Más Información
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

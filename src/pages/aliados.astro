@@ -1,0 +1,399 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+import Banner from '../components/Banner.astro';
+
+const partners = [
+  {
+    name: "Universidad Francisco de Paula Santander",
+    category: "Universidad",
+    description: "Colaboración en programas de extensión y prácticas académicas.",
+    logo: "UFPS"
+  },
+  {
+    name: "Universidad Minuto de Dios - UNIMINUTO",
+    category: "Universidad",
+    description: "Apoyo en tutorías académicas para estudiantes de ingeniería.",
+    logo: "UNIMINUTO"
+  },
+  {
+    name: "Colegio San Bartolomé",
+    category: "Institución Educativa",
+    description: "Talleres de preparación ICFES y refuerzo académico.",
+    logo: "CSB"
+  },
+  {
+    name: "Colegio Calasanz Cúcuta",
+    category: "Institución Educativa",
+    description: "Programa de asesorías en matemáticas y ciencias.",
+    logo: "CALASANZ"
+  },
+  {
+    name: "SENA Regional Norte de Santander",
+    category: "Formación Técnica",
+    description: "Capacitaciones especializadas para instructores.",
+    logo: "SENA"
+  },
+  {
+    name: "Cámara de Comercio de Cúcuta",
+    category: "Empresarial",
+    description: "Talleres de emprendimiento y desarrollo empresarial.",
+    logo: "CCCúcuta"
+  },
+  {
+    name: "Innpulsa Colombia",
+    category: "Emprendimiento",
+    description: "Validación técnica de proyectos de innovación.",
+    logo: "INNPULSA"
+  },
+  {
+    name: "Corporación Educativa del Norte",
+    category: "Institución Educativa",
+    description: "Programas de mejoramiento académico estudiantil.",
+    logo: "CEN"
+  }
+];
+
+const categories = [
+  { name: "Universidad", count: partners.filter(p => p.category === "Universidad").length },
+  { name: "Institución Educativa", count: partners.filter(p => p.category === "Institución Educativa").length },
+  { name: "Formación Técnica", count: partners.filter(p => p.category === "Formación Técnica").length },
+  { name: "Empresarial", count: partners.filter(p => p.category === "Empresarial").length },
+  { name: "Emprendimiento", count: partners.filter(p => p.category === "Emprendimiento").length }
+];
+
+// Función para generar logo SVG
+function generateLogo(name: string, index: number) {
+  const colors = [
+    ['#dc4dff', '#ff006e'],
+    ['#3b82f6', '#06b6d4'],
+    ['#10b981', '#059669'],
+    ['#f59e0b', '#d97706'],
+    ['#ef4444', '#dc2626'],
+    ['#8b5cf6', '#7c3aed'],
+    ['#06b6d4', '#0891b2'],
+    ['#84cc16', '#65a30d']
+  ];
+
+  const [color1, color2] = colors[index % colors.length];
+
+  return `
+    <svg class="w-full h-full" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="partnerGrad-${index}" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:${color1};stop-opacity:1" />
+          <stop offset="100%" style="stop-color:${color2};stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect width="200" height="100" fill="url(#partnerGrad-${index})" rx="8" />
+      <text x="100" y="50" text-anchor="middle" dy="0.35em" fill="white" font-size="16" font-weight="600" font-family="system-ui">
+        ${name}
+      </text>
+    </svg>
+  `;
+}
+---
+
+<Layout 
+  title="Aliados - AVL Asesorías" 
+  description="Conoce nuestros aliados estratégicos: universidades, colegios, empresas y organizaciones que confían en AVL Asesorías."
+>
+  <!-- Hero Section -->
+  <Banner
+    title="Nuestros Aliados Estratégicos"
+    subtitle="🤝 Colaboraciones"
+    description="Trabajamos junto a instituciones educativas, empresas y organizaciones líderes para amplificar el impacto de la educación de calidad."
+    variant="gradient"
+  />
+
+  <!-- Partners Grid Section -->
+  <section class="section-padding bg-white">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gradient mb-4">
+          Instituciones que Confían en Nosotros
+        </h2>
+        <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+          Hemos establecido alianzas estratégicas con instituciones reconocidas 
+          para brindar servicios académicos de la más alta calidad.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {partners.map((partner, index) => (
+          <div class="card p-6 text-center hover-lift space-y-4">
+            <!-- Logo -->
+            <div class="w-full h-20 mb-4">
+              <div set:html={generateLogo(partner.logo, index)} />
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-2">
+              <h3 class="font-semibold text-neutral-800 text-sm lg:text-base">
+                {partner.name}
+              </h3>
+
+              <span class="inline-block bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-xs font-medium">
+                {partner.category}
+              </span>
+
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                {partner.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="section-padding bg-gradient-to-br from-primary-50 to-neutral-50">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-neutral-800 mb-4">
+          Sectores de Colaboración
+        </h2>
+        <p class="text-xl text-neutral-600 max-w-2xl mx-auto">
+          Trabajamos con diferentes tipos de instituciones para crear un ecosistema 
+          educativo integral y de alta calidad.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {categories.map((category, index) => (
+          <div class="text-center space-y-4">
+            <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent rounded-full flex items-center justify-center mx-auto">
+              <span class="text-white font-bold text-xl">{category.count}</span>
+            </div>
+            <div>
+              <h3 class="font-semibold text-neutral-800">{category.name}</h3>
+              <p class="text-sm text-neutral-600">
+                {category.count} aliado{category.count !== 1 ? 's' : ''}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section-padding bg-white">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-neutral-800 mb-4">
+            Beneficios de Nuestras Alianzas
+          </h2>
+          <p class="text-xl text-neutral-600">
+            Estas colaboraciones nos permiten ofrecer servicios más completos 
+            y de mayor impacto en la comunidad educativa.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-800 mb-2">
+                  Mayor Alcance
+                </h3>
+                <p class="text-neutral-600">
+                  Llegamos a más estudiantes y profesionales a través de 
+                  nuestras instituciones aliadas.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-800 mb-2">
+                  Calidad Garantizada
+                </h3>
+                <p class="text-neutral-600">
+                  El respaldo de instituciones reconocidas avala la calidad 
+                  de nuestros servicios académicos.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-800 mb-2">
+                  Red de Colaboración
+                </h3>
+                <p class="text-neutral-600">
+                  Intercambio de mejores prácticas y metodologías 
+                  con instituciones líderes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-800 mb-2">
+                  Recursos Especializados
+                </h3>
+                <p class="text-neutral-600">
+                  Acceso a recursos educativos, laboratorios y 
+                  materiales de primera calidad.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-800 mb-2">
+                  Innovación Continua
+                </h3>
+                <p class="text-neutral-600">
+                  Desarrollo conjunto de nuevas metodologías y 
+                  programas educativos innovadores.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-800 mb-2">
+                  Impacto Social
+                </h3>
+                <p class="text-neutral-600">
+                  Mayor impacto en el desarrollo educativo y 
+                  profesional de la región.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnership CTA -->
+  <section class="section-padding bg-gradient-to-br from-neutral-900 to-neutral-800 text-white">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-6">
+          ¿Tu Institución Quiere Ser Nuestro Aliado?
+        </h2>
+
+        <p class="text-xl mb-8 opacity-90">
+          Si representas una institución educativa, empresa o organización 
+          interesada en establecer una alianza estratégica, nos encantaría conocerte.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-left">
+            <h3 class="text-xl font-semibold mb-4">Para Instituciones Educativas</h3>
+            <ul class="space-y-2 text-sm opacity-90">
+              <li class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Programas de tutorías especializadas</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Talleres de metodología de estudio</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Capacitación docente</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Programas de nivelación académica</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-left">
+            <h3 class="text-xl font-semibold mb-4">Para Empresas y Organizaciones</h3>
+            <ul class="space-y-2 text-sm opacity-90">
+              <li class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Capacitación técnica especializada</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Consultoría en validación técnica</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Desarrollo de programas formativos</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Apoyo en innovación educativa</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="mailto:alianzas@avlasesorias.com" 
+            class="btn bg-white text-primary-700 hover:bg-neutral-100 text-lg px-8 py-4"
+          >
+            Propuesta de Alianza
+          </a>
+
+          <a 
+            href="/nosotros#contacto" 
+            class="btn btn-outline border-white text-white hover:bg-white hover:text-primary-700 text-lg px-8 py-4"
+          >
+            Más Información
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

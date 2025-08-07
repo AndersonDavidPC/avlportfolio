@@ -1,0 +1,138 @@
+
+---
+const navItems = [
+  { name: 'Inicio', href: '/' },
+  { name: 'Nosotros', href: '/nosotros' },
+  { name: 'Servicios', href: '/servicios' },
+  { name: 'Testimonios', href: '/testimonios' },
+  { name: 'Aliados', href: '/aliados' },
+];
+---
+
+<nav class="bg-white/95 backdrop-blur-sm shadow-lg border-b border-primary-100 sticky top-0 z-50">
+  <div class="container-custom">
+    <div class="flex justify-between items-center py-4">
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <a href="/" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+          <svg class="w-10 h-10 text-primary-600" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L2 7v10c0 5.55 3.84 9.739 9 11 5.16-1.261 9-5.45 9-11V7l-10-5z"/>
+            <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/>
+          </svg>
+          <div class="flex flex-col">
+            <span class="text-xl font-bold text-gradient">AVL Asesorías</span>
+            <span class="text-xs text-neutral-500">Excelencia Académica</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        {navItems.map((item) => (
+          <a 
+            href={item.href}
+            class="text-neutral-700 hover:text-primary-600 font-medium transition-colors duration-300 relative group py-2"
+          >
+            {item.name}
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        ))}
+
+        <!-- CTA Button -->
+        <a 
+          href="#contacto" 
+          class="btn btn-primary ml-4"
+        >
+          Contáctanos
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="lg:hidden">
+        <button
+          id="mobile-menu-button"
+          class="text-neutral-700 hover:text-primary-600 transition-colors p-2"
+          aria-label="Abrir menú móvil"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="lg:hidden hidden border-t border-neutral-100 py-4">
+      <div class="flex flex-col space-y-4">
+        {navItems.map((item) => (
+          <a 
+            href={item.href}
+            class="text-neutral-700 hover:text-primary-600 font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-primary-50"
+          >
+            {item.name}
+          </a>
+        ))}
+
+        <div class="pt-4 border-t border-neutral-100">
+          <a 
+            href="#contacto" 
+            class="btn btn-primary w-full text-center block"
+          >
+            Contáctanos
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.querySelector('.menu-icon');
+    const closeIcon = document.querySelector('.close-icon');
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        const isHidden = mobileMenu.classList.contains('hidden');
+
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          menuIcon?.classList.add('hidden');
+          closeIcon?.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          menuIcon?.classList.remove('hidden');
+          closeIcon?.classList.add('hidden');
+        }
+      });
+
+      // Cerrar menú al hacer clic en un enlace
+      const mobileLinks = mobileMenu.querySelectorAll('a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.add('hidden');
+          menuIcon?.classList.remove('hidden');
+          closeIcon?.classList.add('hidden');
+        });
+      });
+    }
+
+    // Highlight active page
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a[href]');
+
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPath || 
+          (currentPath === '/' && link.getAttribute('href') === '/')) {
+        link.classList.add('text-primary-600');
+        const underline = link.querySelector('span');
+        if (underline) {
+          underline.classList.add('w-full');
+        }
+      }
+    });
+  });
+</script>
