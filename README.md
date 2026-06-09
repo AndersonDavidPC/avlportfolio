@@ -1,48 +1,96 @@
-# Astro Starter Kit: Basics
 
-```sh
-yarn create astro@latest -- --template basics
+# AVL Asesorías - Sitio Web Oficial
+
+Sitio web para AVL Asesorías, empresa especializada en asesorías académicas presenciales en Cúcuta y área metropolitana, y remotas en todo Colombia.
+
+## 🚀 Instalación y ejecución
+
+### Prerrequisitos
+- Node.js 18+ 
+- npm o yarn
+
+### Pasos
+
+```bash
+# Clonar el repositorio
+git clone <url-del-repositorio>
+cd avl-asesorias
+
+# Instalar dependencias
+npm install
+
+# Configurar variables de entorno
+cp .env.example .env
+
+# Ejecutar en modo desarrollo
+npm run dev
+
+# Generar build de producción
+npm run build
+
+# Vista previa de producción
+npm run preview
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 📁 Estructura del proyecto
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
+```
 /
 ├── public/
 │   └── favicon.svg
 ├── src/
+│   ├── components/
+│   │   ├── Banner.astro
+│   │   ├── Cards.astro
+│   │   ├── Footer.astro
+│   │   ├── Navbar.astro
+│   │   ├── Tabs.astro
+│   │   └── TeamList.astro
 │   ├── layouts/
 │   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── nosotros.astro
+│   │   ├── servicios.astro
+│   │   ├── testimonios.astro
+│   │   └── aliados.astro
+│   └── styles/
+│       └── global.css
+├── astro.config.mjs
+├── tailwind.config.cjs
+├── postcss.config.cjs
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🎨 Tecnologías utilizadas
 
-## 🧞 Commands
+- **Astro** - Framework web moderno y rápido
+- **Tailwind CSS** - Framework de utilidades CSS
+- **TypeScript** - Lenguaje de programación tipado
 
-All commands are run from the root of the project, from a terminal:
+## 📱 Características
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `yarn install`             | Installs dependencies                            |
-| `yarn dev`             | Starts local dev server at `localhost:4321`      |
-| `yarn build`           | Build your production site to `./dist/`          |
-| `yarn preview`         | Preview your build locally, before deploying     |
-| `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `yarn astro -- --help` | Get help using the Astro CLI                     |
+- ✅ Diseño responsive
+- ✅ Optimizado para SEO
+- ✅ Componentes reutilizables
+- ✅ Navegación intuitiva
+- ✅ Formularios funcionales
+- ✅ Integración con redes sociales
 
-## 👀 Want to learn more?
+## 🤝 Contribuir
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para detalles.
+
+## 📞 Contacto
+
+AVL Asesorías - [@avlasesorias](https://instagram.com/avlasesorias) - info@avlasesorias.com
+
+Enlace del proyecto: [https://github.com/username/avl-asesorias](https://github.com/username/avl-asesorias)

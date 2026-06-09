@@ -1,0 +1,181 @@
+
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  ctaText?: string;
+  ctaUrl?: string;
+  backgroundImage?: string;
+  variant?: 'default' | 'gradient' | 'image';
+}
+
+const { 
+  title, 
+  subtitle, 
+  description, 
+  ctaText = "Contáctanos", 
+  ctaUrl = "#contacto",
+  backgroundImage,
+  variant = 'default'
+} = Astro.props;
+---
+
+<section class={`relative overflow-hidden ${
+  variant === 'gradient' 
+    ? 'bg-gradient-to-br from-primary-600 via-primary-700 to-accent' 
+    : variant === 'image' 
+    ? 'bg-neutral-900' 
+    : 'bg-white'
+} ${variant === 'default' ? 'text-neutral-800' : 'text-white'}`}>
+
+  <!-- Background Image -->
+  {variant === 'image' && backgroundImage && (
+    <div class="absolute inset-0">
+      <img 
+        src={backgroundImage} 
+        alt="" 
+        class="w-full h-full object-cover opacity-30"
+      />
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-900/80 to-neutral-900/80"></div>
+    </div>
+  )}
+
+  <!-- Decorative Elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full opacity-20 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/20 rounded-full opacity-20 blur-3xl"></div>
+  </div>
+
+  <div class="container-custom relative z-10">
+    <div class="min-h-[80vh] flex items-center">
+      <div class="grid lg:grid-cols-2 gap-12 items-center w-full">
+
+        <!-- Content -->
+        <div class="space-y-8 text-center lg:text-left">
+          {subtitle && (
+            <div class="inline-block">
+              <span class={`px-4 py-2 rounded-full text-sm font-medium ${
+                variant === 'default' 
+                  ? 'bg-primary-100 text-primary-700' 
+                  : 'bg-white/20 text-white backdrop-blur-sm'
+              }`}>
+                {subtitle}
+              </span>
+            </div>
+          )}
+
+          <h1 class={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ${
+            variant === 'default' ? 'text-gradient' : ''
+          }`}>
+            {title}
+          </h1>
+
+          {description && (
+            <p class={`text-xl leading-relaxed max-w-2xl ${
+              variant === 'default' ? 'text-neutral-600' : 'text-white'
+            }`}>
+              {description}
+            </p>
+          )}
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a 
+              href={ctaUrl}
+              class={`btn ${variant === 'default' ? 'btn-primary' : 'btn-secondary bg-white text-primary-700 hover:bg-neutral-100'} text-lg px-8 py-4`}
+            >
+              {ctaText}
+            </a>
+
+            <a 
+              href="/servicios"
+              class={`btn ${variant === 'default' ? 'btn-outline' : 'btn-outline border-white text-white hover:bg-white hover:text-primary-700'} text-lg px-8 py-4`}
+            >
+              Ver Servicios
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Image/SVG -->
+        <div class="relative">
+          <div class="relative z-10 max-w-lg mx-auto lg:max-w-none">
+            <svg class="w-full h-auto drop-shadow-2xl float-animation" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background Elements -->
+              <circle cx="250" cy="200" r="150" fill="url(#bannerGrad)" opacity="0.1"/>
+              <rect x="100" y="100" width="300" height="200" rx="20" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+              
+              <!-- Tablet/Screen -->
+              <rect x="140" y="80" width="220" height="240" rx="12" fill="#ffffff" stroke="url(#bannerGrad)" stroke-width="4"/>
+              <rect x="155" y="100" width="190" height="150" rx="4" fill="#f8fafc"/>
+              
+              <!-- Content on screen -->
+              <rect x="165" y="115" width="100" height="8" rx="4" fill="url(#bannerGrad)" opacity="0.4"/>
+              <rect x="165" y="135" width="170" height="6" rx="3" fill="#e2e8f0"/>
+              <rect x="165" y="150" width="150" height="6" rx="3" fill="#e2e8f0"/>
+              <rect x="165" y="165" width="160" height="6" rx="3" fill="#e2e8f0"/>
+              
+              <circle cx="250" cy="210" r="25" fill="url(#bannerGrad)" opacity="0.2"/>
+              <path d="M240 210 L260 210 M250 200 L250 220" stroke="url(#bannerGrad)" stroke-width="3" stroke-linecap="round"/>
+              
+              <!-- Graduation Cap (Floating) -->
+              <g transform="translate(320, 60) rotate(-15)">
+                <path d="M0 15 L25 0 L50 15 L25 30 Z" fill="url(#bannerGrad)"/>
+                <path d="M10 20 V30 C10 35 40 35 40 30 V20" fill="url(#bannerGrad)" opacity="0.8"/>
+                <path d="M45 15 L45 35" stroke="#ffd700" stroke-width="2"/>
+                <circle cx="45" cy="35" r="3" fill="#ffd700"/>
+              </g>
+
+              <!-- Floating Books -->
+              <g transform="translate(80, 240) rotate(10)">
+                <rect x="0" y="0" width="60" height="80" rx="4" fill="white" stroke="url(#bannerGrad)" stroke-width="2"/>
+                <rect x="10" y="10" width="40" height="4" rx="2" fill="url(#bannerGrad)" opacity="0.3"/>
+                <path d="M0 60 H60" stroke="url(#bannerGrad)" stroke-width="1" opacity="0.2"/>
+              </g>
+
+              <!-- Decorative Particles -->
+              <circle cx="100" cy="100" r="6" fill="#ffd700" class="animate-pulse"/>
+              <circle cx="400" cy="300" r="8" fill="url(#bannerGrad)" opacity="0.5"/>
+              <path d="M420 150 L430 160 M430 150 L420 160" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/>
+
+              <defs>
+                <linearGradient id="bannerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#dc4dff;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Floating Cards -->
+          <div class="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-4 max-w-xs hidden lg:block animation-delay-200 animate-fade-in">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-neutral-800">98% Satisfacción</p>
+                <p class="text-sm text-neutral-600">Estudiantes satisfechos</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-4 max-w-xs hidden lg:block animation-delay-400 animate-fade-in">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3.005 3.005 0 013.75-2.906z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-neutral-800">500+ Estudiantes</p>
+                <p class="text-sm text-neutral-700">Ya confían en nosotros</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
