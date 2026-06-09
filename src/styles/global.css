@@ -36,7 +36,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-500 to-accent text-white border-2 border-primary-500 hover:from-primary-600 hover:to-primary-700 focus:ring-primary-300;
+    @apply bg-gradient-to-r from-primary-600 to-accent-500 text-white border-2 border-primary-600 hover:from-primary-700 hover:to-accent-600 focus:ring-primary-300;
   }
 
   .btn-secondary {
@@ -64,7 +64,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-accent bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent;
   }
 
   .border-gradient {
@@ -76,7 +76,7 @@
     position: absolute;
     inset: 0;
     padding: 2px;
-    background: linear-gradient(135deg, #dc4dff, #ff006e);
+    background: linear-gradient(135deg, #2A5C8A, #FF6B35);
     border-radius: inherit;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: xor;

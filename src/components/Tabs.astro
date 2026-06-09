@@ -47,7 +47,7 @@ const { tabs, variant = 'default' } = Astro.props;
 
         {/* Underline indicator for underline variant */}
         {variant === 'underline' && tab.active && (
-          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent"></span>
+          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500"></span>
         )}
       </button>
     ))}
@@ -106,7 +106,7 @@ const { tabs, variant = 'default' } = Astro.props;
             this.classList.add('text-primary-600', 'border-primary-600');
             // Add underline indicator
             const indicator = document.createElement('span');
-            indicator.className = 'absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent';
+            indicator.className = 'absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500';
             this.appendChild(indicator);
           } else {
             this.classList.add('bg-primary-50', 'text-primary-600', 'border-primary-100');
