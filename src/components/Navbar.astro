@@ -28,10 +28,10 @@ const navItems = [
         {navItems.map((item) => (
           <a 
             href={item.href}
-            class="text-neutral-700 hover:text-primary-600 font-medium transition-colors duration-300 relative group py-2"
+            class="text-neutral-700 hover:text-primary-800 font-medium transition-colors duration-300 relative group py-2"
           >
             {item.name}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-300 group-hover:w-full"></span>
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-700 transition-all duration-300 group-hover:w-full"></span>
           </a>
         ))}
 
@@ -48,7 +48,7 @@ const navItems = [
       <div class="lg:hidden">
         <button
           id="mobile-menu-button"
-          class="text-neutral-700 hover:text-primary-600 transition-colors p-2"
+          class="text-neutral-700 hover:text-primary-800 transition-colors p-2"
           aria-label="Abrir menú móvil"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ const navItems = [
         {navItems.map((item) => (
           <a 
             href={item.href}
-            class="text-neutral-700 hover:text-primary-600 font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-primary-50"
+            class="text-neutral-700 hover:text-primary-800 font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-primary-50"
           >
             {item.name}
           </a>
@@ -124,7 +124,7 @@ const navItems = [
     navLinks.forEach(link => {
       if (link.getAttribute('href') === currentPath || 
           (currentPath === '/' && link.getAttribute('href') === '/')) {
-        link.classList.add('text-primary-600');
+        link.classList.add('text-primary-800');
         const underline = link.querySelector('span');
         if (underline) {
           underline.classList.add('w-full');

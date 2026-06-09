@@ -27,14 +27,14 @@ const { tabs, variant = 'default' } = Astro.props;
           variant === 'pills'
             ? 'px-4 py-2 rounded-md font-medium text-sm flex-1 min-w-0'
             : variant === 'underline'
-            ? 'px-6 py-4 font-medium text-sm relative border-b-2 border-transparent hover:border-primary-300 hover:text-primary-600'
+            ? 'px-6 py-4 font-medium text-sm relative border-b-2 border-transparent hover:border-primary-300 hover:text-primary-800'
             : 'px-6 py-3 font-medium text-sm flex-1 min-w-0 first:rounded-l-lg last:rounded-r-lg border-r border-neutral-200 last:border-r-0'
         } ${tab.active 
           ? variant === 'pills'
             ? 'bg-primary-600 text-white shadow-sm'
             : variant === 'underline'
-            ? 'text-primary-600 border-primary-600'
-            : 'bg-primary-50 text-primary-600 border-primary-100'
+            ? 'text-primary-800 border-primary-600'
+            : 'bg-primary-50 text-primary-800 border-primary-100'
           : variant === 'pills'
             ? 'text-neutral-600 hover:text-neutral-800 hover:bg-white/50'
             : 'text-neutral-600 hover:text-neutral-800 hover:bg-neutral-50'
@@ -47,7 +47,7 @@ const { tabs, variant = 'default' } = Astro.props;
 
         {/* Underline indicator for underline variant */}
         {variant === 'underline' && tab.active && (
-          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500"></span>
+          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-700"></span>
         )}
       </button>
     ))}
@@ -77,9 +77,9 @@ const { tabs, variant = 'default' } = Astro.props;
             if (variant === 'pills') {
               btn.classList.remove('bg-primary-600', 'text-white', 'shadow-sm');
             } else if (variant === 'underline') {
-              btn.classList.remove('text-primary-600', 'border-primary-600');
+              btn.classList.remove('text-primary-800', 'border-primary-600');
             } else {
-              btn.classList.remove('bg-primary-50', 'text-primary-600', 'border-primary-100');
+              btn.classList.remove('bg-primary-50', 'text-primary-800', 'border-primary-100');
             }
 
             if (variant === 'pills') {
@@ -103,13 +103,13 @@ const { tabs, variant = 'default' } = Astro.props;
           if (variant === 'pills') {
             this.classList.add('bg-primary-600', 'text-white', 'shadow-sm');
           } else if (variant === 'underline') {
-            this.classList.add('text-primary-600', 'border-primary-600');
+            this.classList.add('text-primary-800', 'border-primary-600');
             // Add underline indicator
             const indicator = document.createElement('span');
-            indicator.className = 'absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500';
+            indicator.className = 'absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-700';
             this.appendChild(indicator);
           } else {
-            this.classList.add('bg-primary-50', 'text-primary-600', 'border-primary-100');
+            this.classList.add('bg-primary-50', 'text-primary-800', 'border-primary-100');
           }
 
           this.setAttribute('aria-selected', 'true');
