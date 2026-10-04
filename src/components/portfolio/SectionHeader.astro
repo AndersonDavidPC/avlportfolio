@@ -1,0 +1,24 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  gradient?: boolean;
+  light?: boolean;
+}
+
+const { title, description, gradient = true, light = false } = Astro.props;
+---
+
+<div class="text-center mb-12">
+  <h2 class={`text-3xl lg:text-4xl font-bold mb-4 ${
+    light ? 'text-white' : gradient ? 'text-gradient' : 'text-neutral-800'
+  }`}>
+    {title}
+  </h2>
+
+  {description && (
+    <p class={`text-xl max-w-3xl mx-auto ${light ? 'text-neutral-300' : 'text-neutral-700'}`}>
+      {description}
+    </p>
+  )}
+</div>

@@ -1,41 +1,25 @@
 
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Banner from '../components/Banner.astro';
 import TeamList from '../components/TeamList.astro';
 
-const teamMembers = [
-  {
-    name: "Anderson Patiño",
-    role: "Ingeniero de Sistemas - Asesor en Matemáticas, Fisica y Programación",
-    bio: "Apasionado por la educación y la tecnología, brindo asesorías personalizadas en cálculo, física y programación con una metodología enfocada en el éxito y la claridad del estudiante.",
-    avatar: "/assets/AndersonPatino.jpeg",
+const teamEntries = await getCollection('team');
+
+const teamMembers = teamEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((member) => ({
+    name: member.data.name,
+    role: member.data.role,
+    bio: member.data.bio,
+    avatar: member.data.avatar,
     social: {
-      email: "info@avlasesorias.com",
-      linkedin: "linkedin.com/in/anderson-david-patiño-caicedo/"
-    }
-  },
-  {
-    name: "Vanessa Stevenson",
-    role: "Abogada - Especialista en Derechos Humanos",
-    bio: "Apasionada por el derecho y la gestión de proyectos, brindo asesoría jurídica y acompañamiento estratégico para el desarrollo de iniciativas empresariales y sociales, garantizando seguridad jurídica y cumplimiento normativo.",
-    avatar: "/assets/VanessaStevenson.jpeg",
-    social: {
-      email: "info@avlasesorias.com",
-      linkedin: "https://www.linkedin.com/in/vanessa-stevenson-95981a1b1/"
-    }
-  },
-  {
-    name: "Laura Jaimes",
-    role: "Asistente",
-    bio: "Especialista en redacción académica, comprensión lectora, filosofía y ciencias sociales.",
-    avatar: "/assets/LauraJaimes.jpeg",
-    social: {
-      email: "info@avlasesorias.com",
-      linkedin: "https://www.linkedin.com/in/laura-jaimes-397692286/"
-    }
-  }
-];
+      email: member.data.contact?.email,
+      linkedin: member.data.contact?.linkedin,
+    },
+    href: `/equipo/${member.id}`,
+  }));
 
 const socialContributions = [
   {

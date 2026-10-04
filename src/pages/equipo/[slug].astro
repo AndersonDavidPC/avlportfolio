@@ -1,0 +1,214 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ProfileHero from '../../components/portfolio/ProfileHero.astro';
+import SectionHeader from '../../components/portfolio/SectionHeader.astro';
+import ProjectCard from '../../components/portfolio/ProjectCard.astro';
+import Timeline from '../../components/portfolio/Timeline.astro';
+import SkillGroup from '../../components/portfolio/SkillGroup.astro';
+import CredentialList from '../../components/portfolio/CredentialList.astro';
+import ComingSoon from '../../components/portfolio/ComingSoon.astro';
+
+export async function getStaticPaths() {
+  const members = await getCollection('team');
+  return members.map((member) => ({
+    params: { slug: member.id },
+    props: { member },
+  }));
+}
+
+interface Props {
+  member: CollectionEntry<'team'>;
+}
+
+const { member } = Astro.props;
+const data = member.data;
+const isPublished = data.status === 'published';
+
+const pageTitle = `${data.name} - AVL Asesorías`;
+const pageDescription = data.bio ?? `Conoce a ${data.name}, ${data.role} en AVL Asesorías.`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  type="profile"
+  noindex={!isPublished}
+>
+  {isPublished && (
+    <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: data.name,
+      jobTitle: data.role,
+      description: data.bio,
+      image: new URL(data.avatar, Astro.site).toString(),
+      email: data.contact?.email,
+      sameAs: [data.contact?.linkedin, data.contact?.github, data.contact?.website].filter(Boolean),
+      worksFor: {
+        '@type': 'Organization',
+        name: 'AVL Asesorías',
+      },
+    })} />
+  )}
+
+  {!isPublished ? (
+    <>
+      <ProfileHero
+        name={data.name}
+        role={data.role}
+        avatar={data.avatar}
+        contact={data.contact}
+        compact={true}
+      />
+      <ComingSoon name={data.name} />
+    </>
+  ) : (
+    <>
+      <!-- Hero -->
+      <ProfileHero
+        name={data.name}
+        role={data.role}
+        headline={data.headline}
+        location={data.location}
+        avatar={data.avatar}
+        contact={data.contact}
+        highlights={data.highlights}
+      />
+
+      <!-- Sobre mí -->
+      <section class="section-padding bg-white">
+        <div class="container-custom">
+          <SectionHeader title="Sobre mí" />
+
+          {data.summary && (
+            <p class="text-lg text-neutral-700 leading-relaxed max-w-3xl mx-auto text-center mb-12">
+              {data.summary}
+            </p>
+          )}
+
+          {data.highlights && data.highlights.length > 0 && (
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6">
+              {data.highlights.map((highlight) => (
+                <div class="card p-6 text-center">
+                  <p class="text-3xl lg:text-4xl font-bold text-gradient mb-2">{highlight.value}</p>
+                  <p class="text-sm text-neutral-600">{highlight.label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <!-- Proyectos destacados -->
+      {data.projects && data.projects.length > 0 && (
+        <section id="proyectos" class="section-padding bg-gradient-to-br from-primary-50 to-neutral-50">
+          <div class="container-custom">
+            <SectionHeader
+              title="Proyectos Destacados"
+              description="Aplicaciones y plataformas en las que he trabajado, de principio a fin."
+            />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {data.projects.map((project) => (
+                <ProjectCard
+                  name={project.name}
+                  org={project.org}
+                  description={project.description}
+                  stack={project.stack}
+                  metrics={project.metrics}
+                  links={project.links}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- Experiencia -->
+      {data.experience && data.experience.length > 0 && (
+        <section class="section-padding bg-white">
+          <div class="container-custom">
+            <SectionHeader
+              title="Experiencia"
+              description="Mi trayectoria profesional y los retos que he asumido en cada etapa."
+            />
+            <Timeline items={data.experience} />
+          </div>
+        </section>
+      )}
+
+      <!-- Habilidades -->
+      {data.skills && data.skills.length > 0 && (
+        <section class="section-padding bg-gradient-to-br from-primary-900 to-primary-950 text-white">
+          <div class="container-custom">
+            <SectionHeader
+              title="Habilidades"
+              description="Tecnologías y herramientas con las que trabajo a diario."
+              light={true}
+            />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {data.skills.map((group) => (
+                <SkillGroup category={group.category} items={group.items} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- Formación -->
+      {(data.education || data.certifications || data.languages) && (
+        <section class="section-padding bg-gradient-to-br from-primary-50 to-neutral-50">
+          <div class="container-custom">
+            <SectionHeader title="Formación" />
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {data.education && (
+                <CredentialList title="Educación" education={data.education} />
+              )}
+              {data.certifications && (
+                <CredentialList title="Certificaciones" certifications={data.certifications} />
+              )}
+              {data.languages && (
+                <CredentialList title="Idiomas" languages={data.languages} />
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- CTA de contacto -->
+      <section id="contacto" class="section-padding bg-gradient-to-br from-primary-600 to-primary-800 text-white">
+        <div class="container-custom text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">
+            ¿Trabajamos juntos?
+          </h2>
+          <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+            Estoy abierto a nuevos proyectos, colaboraciones y oportunidades. Escríbeme y conversemos.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {data.contact?.email && (
+              <a href={`mailto:${data.contact.email}`} class="btn bg-white text-primary-700 hover:bg-neutral-100 px-8 py-4 text-lg font-semibold">
+                Enviar Email
+              </a>
+            )}
+            {data.contact?.linkedin && (
+              <a
+                href={data.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline border-white text-white hover:bg-white hover:text-primary-700 px-8 py-4 text-lg font-semibold"
+              >
+                LinkedIn
+              </a>
+            )}
+            <a href="/servicios" class="btn btn-outline border-white text-white hover:bg-white hover:text-primary-700 px-8 py-4 text-lg font-semibold">
+              Asesorías AVL
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+</Layout>

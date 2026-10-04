@@ -9,9 +9,10 @@ export interface Props {
   description?: string;
   image?: string;
   type?: string;
+  noindex?: boolean;
 }
 
-const { title, description = "AVL Asesorías - Asesorías académicas presenciales en Cúcuta y remotas en todo Colombia. Especialistas en ingeniería, ciencias básicas y humanidades.", image = "/og-image.jpg", type = "website" } = Astro.props;
+const { title, description = "AVL Asesorías - Asesorías académicas presenciales en Cúcuta y remotas en todo Colombia. Especialistas en ingeniería, ciencias básicas y humanidades.", image = "/og-image.jpg", type = "website", noindex = false } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(image, Astro.url);
@@ -25,6 +26,8 @@ const socialImageURL = new URL(image, Astro.url);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
@@ -86,6 +89,8 @@ const socialImageURL = new URL(image, Astro.url);
         ]
       }
     </script>
+
+    <slot name="head" />
   </head>
 
   <body class="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50/30">

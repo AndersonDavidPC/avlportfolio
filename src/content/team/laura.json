@@ -1,0 +1,12 @@
+{
+  "name": "Laura Jaimes",
+  "role": "Asistente",
+  "avatar": "/assets/LauraJaimes.jpeg",
+  "status": "draft",
+  "order": 3,
+  "bio": "Especialista en redacción académica, comprensión lectora, filosofía y ciencias sociales.",
+  "contact": {
+    "email": "info@avlasesorias.com",
+    "linkedin": "https://www.linkedin.com/in/laura-jaimes-397692286/"
+  }
+}

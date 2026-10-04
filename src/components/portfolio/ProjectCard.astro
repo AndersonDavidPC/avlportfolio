@@ -1,0 +1,90 @@
+---
+export interface Props {
+  name: string;
+  org?: string;
+  description: string;
+  stack?: string[];
+  metrics?: string[];
+  links?: {
+    appStore?: string;
+    playStore?: string;
+    web?: string;
+    repo?: string;
+  };
+}
+
+const { name, org, description, stack = [], metrics = [], links } = Astro.props;
+
+const linkEntries = links
+  ? Object.entries(links).filter(([, url]) => Boolean(url))
+  : [];
+
+const linkLabels: Record<string, string> = {
+  appStore: 'App Store',
+  playStore: 'Google Play',
+  web: 'Sitio web',
+  repo: 'Repositorio',
+};
+---
+
+<div class="card p-6 lg:p-8 hover-lift flex flex-col h-full">
+  {org && (
+    <div class="mb-4">
+      <span class="bg-gradient-to-r from-primary-100 to-primary-200/50 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
+        {org}
+      </span>
+    </div>
+  )}
+
+  <div class="mb-4">
+    <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+      </svg>
+    </div>
+  </div>
+
+  <h3 class="text-xl font-semibold text-neutral-800 mb-3">{name}</h3>
+  <p class="text-neutral-600 leading-relaxed mb-4">{description}</p>
+
+  {metrics.length > 0 && (
+    <ul class="space-y-2 mb-4">
+      {metrics.map((metric) => (
+        <li class="flex items-start space-x-2 text-sm text-primary-800 font-medium">
+          <svg class="w-4 h-4 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>{metric}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {stack.length > 0 && (
+    <div class="flex flex-wrap gap-2 mb-4">
+      {stack.map((tech) => (
+        <span class="bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-full text-xs font-medium">
+          {tech}
+        </span>
+      ))}
+    </div>
+  )}
+
+  {linkEntries.length > 0 && (
+    <div class="flex flex-wrap gap-4 mt-auto pt-2">
+      {linkEntries.map(([key, url]) => (
+        <a
+          href={url as string}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center text-primary-800 font-medium text-sm hover:text-primary-900 transition-colors"
+        >
+          <span>{linkLabels[key] ?? key}</span>
+          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      ))}
+    </div>
+  )}
+</div>

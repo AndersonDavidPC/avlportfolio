@@ -11,6 +11,7 @@ export interface Props {
       twitter?: string;
       email?: string;
     };
+    href?: string;
   }>;
   variant?: 'grid' | 'list';
   columns?: 2 | 3 | 4;
@@ -129,6 +130,18 @@ function generateAvatar(name: string, index: number) {
               </a>
             )}
           </div>
+        )}
+
+        {member.href && (
+          <a
+            href={member.href}
+            class={`inline-flex items-center text-primary-800 font-medium hover:text-primary-900 transition-colors ${variant === 'grid' ? 'justify-center mt-4' : 'mt-3'}`}
+          >
+            <span>Ver portafolio</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
         )}
       </div>
     </div>

@@ -1,0 +1,162 @@
+{
+  "name": "Anderson Patiño",
+  "role": "Ingeniero de Sistemas",
+  "avatar": "/assets/AndersonPatino.jpeg",
+  "status": "published",
+  "order": 1,
+  "headline": "Desarrollador Web y Móvil (React Native)",
+  "location": "Cúcuta, Colombia (remoto)",
+  "bio": "Desarrollador móvil con cerca de 2 años de experiencia en React Native, Expo y TypeScript, con backend en Laravel y Node.js. Lancé 3 apps comerciales para la industria de perforación de petróleo y gas, con calificación de 5.0 en App Store y Google Play y 155 usuarios activos mensuales.",
+  "summary": "Fundador de AVL Asesorías e Ingeniero de Sistemas (UFPS, en proceso de grado). Experiencia en suscripciones y compras integradas, control de versiones en producción e integración de agentes de IA, además de administración de proyectos y equipos.",
+  "contact": {
+    "email": "andersond912@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/anderson-david-patino-caicedo",
+    "github": "https://github.com/AndersonDavidPC"
+  },
+  "highlights": [
+    { "value": "3", "label": "Apps comerciales publicadas" },
+    { "value": "5.0★", "label": "En App Store y Google Play" },
+    { "value": "650+", "label": "Descargas en Android" },
+    { "value": "155", "label": "Usuarios activos mensuales" },
+    { "value": "4.98/5", "label": "Calificación en AVL Asesorías" }
+  ],
+  "skills": [
+    {
+      "category": "Móvil",
+      "items": ["React Native", "Expo", "TypeScript", "React Native IAP", "RevenueCat", "Publicación App Store / Google Play"]
+    },
+    {
+      "category": "Web y backend",
+      "items": ["React", "Next.js", "Laravel", "Node.js", "PHP", "Astro", "Tailwind CSS", "WordPress", "APIs REST", "WebSockets"]
+    },
+    {
+      "category": "Datos e IA",
+      "items": ["SQL", "Integración de API de Gemini"]
+    },
+    {
+      "category": "Herramientas",
+      "items": ["Git", "GitHub", "Docker", "Jira", "Figma", "Excel"]
+    },
+    {
+      "category": "Otros lenguajes",
+      "items": ["JavaScript", "Java", "Python"]
+    }
+  ],
+  "experience": [
+    {
+      "company": "DrillSoft LLC",
+      "role": "Desarrollador de Apps Móviles y Web",
+      "location": "Houston, TX (Remoto)",
+      "period": "Diciembre 2024 - Presente",
+      "context": "Herramientas especializadas para la industria del petróleo y el gas (perforación a presión administrada).",
+      "achievements": [
+        "Lideré el desarrollo de 3 apps multiplataforma (iOS y Android) con React Native, Expo y TypeScript: Friction Drilling Calculator, ECD Calculator y MPD SmartCards. Calificación de 5.0 en ambas tiendas, más de 650 descargas en Android y 155 usuarios activos.",
+        "Implementé suscripciones y compras integradas con RevenueCat y react-native-iap en MPD SmartCards, para acceso a contenido premium.",
+        "Diseñé el backend en Laravel (autenticación, usuarios, contenido dinámico) con módulos en Node.js para funcionalidades específicas y mejoras de rendimiento, incluyendo un sistema de versiones con actualizaciones obligatorias y recomendadas.",
+        "Lidero la integración de agentes de IA con la API de Gemini en Friction Drilling Calculator y ECD Calculator, para asistencia técnica contextual (fase inicial).",
+        "Desarrollé con Laravel y WebSockets una app web que visualiza datos en tiempo real de sensores IoT en operaciones MPD.",
+        "Contribuí a Sirius (React, Laravel): módulos de gestión de unidades y gráficos de variables de pozo por profundidad y tiempo. Construí desde cero la exportación a Excel, CSV y PDF.",
+        "Administré el sitio corporativo en WordPress e impulsé la internacionalización de los productos en español, inglés y portugués."
+      ]
+    },
+    {
+      "company": "AVL Asesorías",
+      "role": "Fundador y Gerente | Tutor y Desarrollador Web",
+      "location": "Cúcuta",
+      "period": "Febrero 2025 - Presente",
+      "context": "Asesoría académica en cálculo, física y programación, de primaria a universidad.",
+      "achievements": [
+        "Fundé y dirijo el emprendimiento: finanzas, contratación y supervisión de personal, programación de clases y atención al cliente.",
+        "Desarrollé el portafolio empresarial con Astro y Tailwind CSS.",
+        "Calificación promedio de 4.98/5 y 100% de estudiantes que nos recomiendan tras cada sesión."
+      ]
+    },
+    {
+      "company": "División de Biblioteca en UFPS",
+      "role": "Ingeniero de Sistemas Practicante",
+      "location": "Cúcuta",
+      "period": "Agosto 2024 - Diciembre 2024",
+      "achievements": [
+        "Desarrollé aplicaciones web institucionales y un CMS adaptable, utilizando Next.js en servidor Debian.",
+        "Creé un sistema de gestión para asignar más de 15 becas de trabajo según habilidades y necesidades de cada área.",
+        "Capacité a más de 50 personas en gestores de referencias bibliográficas."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Friction Drilling Calculator",
+      "org": "DrillSoft LLC",
+      "description": "App móvil para cálculo de fricción en operaciones de perforación, con asistencia contextual mediante IA (API de Gemini).",
+      "stack": ["React Native", "Expo", "TypeScript", "Gemini API"],
+      "metrics": ["5.0★ en tiendas", "650+ descargas"],
+      "featured": true
+    },
+    {
+      "name": "ECD Calculator",
+      "org": "DrillSoft LLC",
+      "description": "Calculadora de densidad equivalente de circulación (ECD) para operaciones MPD, con integración de agentes de IA.",
+      "stack": ["React Native", "Expo", "TypeScript", "Gemini API"],
+      "metrics": ["5.0★ en tiendas"],
+      "featured": true
+    },
+    {
+      "name": "MPD SmartCards",
+      "org": "DrillSoft LLC",
+      "description": "App con contenido técnico premium para perforación a presión administrada, con suscripciones y compras integradas.",
+      "stack": ["React Native", "Expo", "TypeScript", "RevenueCat", "react-native-iap"],
+      "metrics": ["155 usuarios activos mensuales"],
+      "featured": true
+    },
+    {
+      "name": "Monitor IoT en tiempo real",
+      "org": "DrillSoft LLC",
+      "description": "Aplicación web que visualiza en tiempo real datos de sensores IoT durante operaciones MPD.",
+      "stack": ["Laravel", "WebSockets"],
+      "featured": false
+    },
+    {
+      "name": "Sirius",
+      "org": "DrillSoft LLC",
+      "description": "Módulos de gestión de unidades y gráficos de variables de pozo por profundidad y tiempo, con exportación de datos.",
+      "stack": ["React", "Laravel"],
+      "metrics": ["Exportación a Excel, CSV y PDF"],
+      "featured": false
+    },
+    {
+      "name": "Portafolio empresarial AVL Asesorías",
+      "org": "AVL Asesorías",
+      "description": "Sitio corporativo desarrollado desde cero para el emprendimiento de asesorías académicas.",
+      "stack": ["Astro", "Tailwind CSS"],
+      "links": { "web": "/" },
+      "featured": false
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universidad Francisco de Paula Santander",
+      "degree": "Ingeniero de Sistemas",
+      "location": "Cúcuta, Colombia",
+      "period": "En proceso de grado (Octubre 2026)"
+    },
+    {
+      "institution": "IE Francisco José de Caldas",
+      "degree": "Bachiller Técnico en Asistencia Administrativa",
+      "location": "Tibú, Colombia",
+      "period": "2017"
+    }
+  ],
+  "certifications": [
+    { "name": "Curso intermedio de React Native", "issuer": "Frontend Masters", "year": "2025" },
+    { "name": "Fundamentos de Planeación y Administración de Proyectos", "issuer": "Coursera - University of Virginia", "year": "2024" },
+    { "name": "AWS Academy Cloud Security Foundations", "issuer": "AWS Academy", "year": "2024" },
+    { "name": "Curso de Docker: Fundamentos", "issuer": "Platzi", "year": "2024" },
+    { "name": "Introducción al desarrollo de apps móviles para Android", "issuer": "Coursera - Meta", "year": "2024" },
+    { "name": "AWS Academy Cloud Foundations", "issuer": "AWS Academy", "year": "2023" },
+    { "name": "Curso Profesional de JavaScript", "issuer": "Platzi", "year": "2021" }
+  ],
+  "languages": [
+    { "name": "Español", "level": "Nativo" },
+    { "name": "Inglés", "level": "Avanzado" }
+  ]
+}

@@ -207,6 +207,19 @@ Sticky (`sticky top-0 z-50`), fondo `bg-white/95 backdrop-blur-sm`. Subrayado an
 - `Header.astro`: no se importa en ninguna página. No seguir su estructura (`<h1>` suelto sin estilos).
 - `SocialIcons.jsx`: componente React que depende de `@fortawesome/react-fontawesome`, no instalado en `package.json`. El patrón vigente de iconos sociales es el SVG inline de `Footer.astro`.
 
+### 6.11 Componentes de portafolio personal (`src/components/portfolio/`)
+Usados exclusivamente por `src/pages/equipo/[slug].astro` (ver §7.8). Son extensiones del sistema, no clases nuevas: reutilizan `.btn`, `.card`, el gradiente hero, el icon tile y las tarjetas flotantes ya definidos.
+
+| Componente | Props clave | Qué es |
+|---|---|---|
+| `ProfileHero.astro` | `name, role, headline?, location?, avatar, contact?, highlights?, compact?` | Variante de `Banner` para una persona: foto circular en vez de ilustración SVG, mismas tarjetas flotantes, botones de contacto + redes (email/LinkedIn/GitHub/web). `compact` reduce la altura para el estado "en construcción". |
+| `SectionHeader.astro` | `title, description?, gradient?, light?` | El patrón de título de sección de §3 convertido en componente, con variante `light` para fondos oscuros. |
+| `ProjectCard.astro` | `name, org?, description, stack?, metrics?, links?` | Tarjeta de proyecto: icon tile, badge de organización, métricas como checklist, stack como chips `bg-neutral-100`, links de tienda/repo con flecha. |
+| `Timeline.astro` | `items: {company, role, location?, period, context?, achievements?}[]` | Línea de tiempo vertical (`border-l` + nodos con gradiente de marca) para experiencia laboral. |
+| `SkillGroup.astro` | `category, items[]` | Tarjeta `bg-white/10 backdrop-blur-sm` para una categoría de habilidades, pensada para la sección oscura. |
+| `CredentialList.astro` | `title, education? \| certifications? \| languages?` | `.card` genérica para educación, certificaciones o idiomas (una de las tres listas por instancia). |
+| `ComingSoon.astro` | `name` | Estado de "portafolio en construcción" para miembros en `draft` (§7.8). |
+
 ---
 
 ## 7. Patrones de sección
@@ -226,6 +239,10 @@ Reutilizar estos bloques en vez de inventar estructura nueva:
 5. **CTA de contacto** (`id="contacto"`, siempre al final de `index.astro` y `nosotros.astro`): fondo **cta gradient**, texto centrado, botones WhatsApp (verde de marca de WhatsApp, no de la paleta propia — aceptado como excepción porque es un logo externo) + Email (`.btn-outline` invertido).
 6. **Tarjeta de aliado/partner** (`aliados.astro`): logo + nombre + badge de categoría dentro de `.card`.
 7. **Ritmo de fondos entre secciones** de una página larga: blanco → *light section* → blanco → *dark section* → (a veces) *cta*. No encadenar dos secciones oscuras seguidas ni dos blancas con el mismo contenido visual sin un cambio de fondo entre medio.
+8. **Página de perfil personal** (`/equipo/[slug]`, fuente: `src/content/team/*.json`): cada miembro del equipo tiene una página propia.
+   - **`status: "published"`** (ej. Anderson): `ProfileHero` → *Sobre mí* (blanco, resumen + franja de métricas) → *Proyectos destacados* `#proyectos` (light section, grid de `ProjectCard`) → *Experiencia* (blanco, `Timeline`) → *Habilidades* (dark section, grid de `SkillGroup`) → *Formación* (light section, 3 `CredentialList`) → *CTA de contacto* `#contacto` (cta gradient). Sigue el ritmo de fondos del punto 7.
+   - **`status: "draft"`** (Vanessa, Laura mientras no se cargue su información): `ProfileHero` en modo `compact` (solo foto, nombre, rol y LinkedIn) + `ComingSoon`. La página lleva `noindex` vía `Layout` hasta que pase a `published`.
+   - `TeamList.astro` en `/nosotros` enlaza a cada página con "Ver portafolio" cuando el miembro trae `href`.
 
 ---
 
