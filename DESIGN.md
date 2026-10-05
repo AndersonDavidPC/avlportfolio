@@ -122,6 +122,7 @@ Usa `.text-gradient` cuando la sección abre contenido nuevo (servicios, aliados
 | Gaps de grid | `gap-4` (compacto) · `gap-6/8` (cards) · `gap-12` (hero de dos columnas) | |
 | Breakpoints | `sm` (formularios/botones) · `md` (grids de 2 col) · `lg` (navegación desktop, grids de 3–4 col, tipografía grande) | consistente con Tailwind default |
 | Hero | `min-h-[80vh]` | única altura mínima "especial" del sitio |
+| `aspectRatio.phone` | `aspect-phone` → `9 / 19.5` | marco de teléfono en capturas de apps móviles (§10.1) |
 
 Grids responsivas típicas: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3` (servicios, stats) y `...lg:grid-cols-4` (footer, aliados).
 
@@ -214,7 +215,9 @@ Usados exclusivamente por `src/pages/equipo/[slug].astro` (ver §7.8). Son exten
 |---|---|---|
 | `ProfileHero.astro` | `name, role, headline?, location?, avatar, contact?, highlights?, compact?` | Variante de `Banner` para una persona: foto circular en vez de ilustración SVG, mismas tarjetas flotantes, botones de contacto + redes (email/LinkedIn/GitHub/web). `compact` reduce la altura para el estado "en construcción". |
 | `SectionHeader.astro` | `title, description?, gradient?, light?` | El patrón de título de sección de §3 convertido en componente, con variante `light` para fondos oscuros. |
-| `ProjectCard.astro` | `name, org?, description, stack?, metrics?, links?` | Tarjeta de proyecto: icon tile, badge de organización, métricas como checklist, stack como chips `bg-neutral-100`, links de tienda/repo con flecha. |
+| `ProjectCard.astro` | `name, slug, type: 'mobile'\|'web', visibility?, org?, description, stack?, metrics?, links?` | Tarjeta de proyecto: `ProjectMedia` como cabecera, badge de organización + badge de tipo, métricas como checklist, stack como chips `bg-neutral-100`, y un pie "dónde consultarlo" que cambia según `type`/`visibility` (§10.1). |
+| `ProjectMedia.astro` | `name, slug, type` | Resuelve las capturas del proyecto vía `src/utils/projectMedia.ts`. `web` → una imagen `aspect-video object-cover object-top`; `mobile` → hasta 3 capturas en marco de teléfono (`aspect-phone`) sobre un escenario claro. Sin capturas, muestra un icon tile de placeholder (en `dev` con la medida exacta a soltar). |
+| `StoreBadge.astro` | `store: 'appStore'\|'playStore', href, appName` | Insignia oscura (`bg-neutral-900`) con el logo de la tienda y texto en dos líneas, para apps móviles públicas. |
 | `Timeline.astro` | `items: {company, role, location?, period, context?, achievements?}[]` | Línea de tiempo vertical (`border-l` + nodos con gradiente de marca) para experiencia laboral. |
 | `SkillGroup.astro` | `category, items[]` | Tarjeta `bg-white/10 backdrop-blur-sm` para una categoría de habilidades, pensada para la sección oscura. |
 | `CredentialList.astro` | `title, education? \| certifications? \| languages?` | `.card` genérica para educación, certificaciones o idiomas (una de las tres listas por instancia). |
@@ -277,6 +280,17 @@ Regla: toda animación nueva usa `duration-300` salvo que sea una entrada de pá
 - `public/assets/*.jpeg`: fotos de equipo (`AndersonPatino`, `LauraJaimes`, `VanessaStevenson`) — pasar siempre como `avatar` a `TeamList`, nunca dejar que genere el avatar con iniciales si hay foto real disponible.
 - `public/assets/*.png`: logos de aliados (`drillsoft`, `ayzatec`, `cableexito`, `xyzqua`, `cootranscarga`) — mostrar en tamaño contenido (`object-contain`), fondo blanco o neutro detrás, nunca sobre fondo oscuro sin padding.
 - Imagen OG (`/og-image.jpg`, referenciada en `Layout.astro`) — **confirmar que el archivo existe en `public/`** antes de depender de las meta tags de redes sociales.
+
+### 10.1 Capturas de proyectos (`ProjectCard` / `ProjectMedia`)
+
+Convención de carpetas: `public/assets/projects/<slug>/`, con los archivos nombrados `1.png`, `2.png`, `3.png` (también válidos `.jpg`, `.jpeg`, `.webp`, `.avif`). El `slug` es el del proyecto en `src/content/team/*.json`. No hace falta tocar el JSON ni el código: `ProjectMedia.astro` lee la carpeta en build vía `src/utils/projectMedia.ts` y muestra lo que encuentra.
+
+| Tipo (`type`) | Cantidad | Proporción | Tamaño recomendado | Peso máx. | Encuadre |
+|---|---|---|---|---|---|
+| `web` | 1 | **16:9** | **1600 × 900 px** (mín. 1280×720) | 400 KB | captura del viewport sin la barra del navegador; `object-cover object-top` recorta por abajo si hace falta |
+| `mobile` | hasta 3 | **9:19.5** | **1080 × 2340 px** | 300 KB c/u | pantalla completa del dispositivo, dentro de un marco oscuro (`aspect-phone`) |
+
+Sin capturas cargadas se muestra un placeholder con el icon tile de la marca (en producción) y, solo en `npm run dev`, el texto con la medida exacta pendiente de agregar — así nunca se publica una tarjeta rota, y en local es evidente qué falta.
 
 ---
 

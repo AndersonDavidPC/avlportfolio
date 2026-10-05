@@ -113,6 +113,9 @@ const pageDescription = data.bio ?? `Conoce a ${data.name}, ${data.role} en AVL 
               {data.projects.map((project) => (
                 <ProjectCard
                   name={project.name}
+                  slug={project.slug}
+                  type={project.type}
+                  visibility={project.visibility}
                   org={project.org}
                   description={project.description}
                   stack={project.stack}

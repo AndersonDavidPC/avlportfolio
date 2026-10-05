@@ -52,6 +52,9 @@ const team = defineCollection({
       .array(
         z.object({
           name: z.string(),
+          slug: z.string(),
+          type: z.enum(['mobile', 'web']),
+          visibility: z.enum(['public', 'private']).default('public'),
           org: z.string().optional(),
           description: z.string(),
           stack: z.array(z.string()).default([]),

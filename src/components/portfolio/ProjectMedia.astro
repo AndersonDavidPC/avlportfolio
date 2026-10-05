@@ -1,0 +1,78 @@
+---
+import { PROJECT_MEDIA, getProjectImages, type ProjectType } from '../../utils/projectMedia';
+
+export interface Props {
+  name: string;
+  slug: string;
+  type: ProjectType;
+}
+
+const { name, slug, type } = Astro.props;
+const spec = PROJECT_MEDIA[type];
+const images = getProjectImages(slug, type);
+const hasImages = images.length > 0;
+
+const helpText = `Agrega ${spec.max > 1 ? `hasta ${spec.max} capturas` : '1 captura'} de ${spec.width}×${spec.height}px (${spec.ratio}) en public/assets/projects/${slug}/`;
+---
+
+{type === 'web' ? (
+  hasImages ? (
+    <div class="mb-6 aspect-video rounded-lg overflow-hidden">
+      <img
+        src={images[0]}
+        alt={`${name} — captura`}
+        width={spec.width}
+        height={spec.height}
+        loading="lazy"
+        decoding="async"
+        class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+      />
+    </div>
+  ) : (
+    <div class="mb-6 aspect-video rounded-lg bg-gradient-to-br from-primary-50 to-primary-100 flex flex-col items-center justify-center gap-2 p-4 relative overflow-hidden">
+      {import.meta.env.DEV && (
+        <div class="absolute inset-0 border-2 border-dashed border-primary-300 rounded-lg"></div>
+      )}
+      <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      {import.meta.env.DEV && (
+        <p class="text-xs text-primary-700 text-center max-w-xs relative z-10">{helpText}</p>
+      )}
+    </div>
+  )
+) : (
+  hasImages ? (
+    <div class="mb-6 aspect-video rounded-lg bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center gap-3 p-4">
+      {images.map((src, i) => (
+        <div class="h-full aspect-phone rounded-xl border-4 border-neutral-800 bg-neutral-800 overflow-hidden shadow-lg">
+          <img
+            src={src}
+            alt={`${name} — captura ${i + 1}`}
+            width={spec.width}
+            height={spec.height}
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="mb-6 aspect-video rounded-lg bg-gradient-to-br from-primary-50 to-primary-100 flex flex-col items-center justify-center gap-2 p-4 relative overflow-hidden">
+      {import.meta.env.DEV && (
+        <div class="absolute inset-0 border-2 border-dashed border-primary-300 rounded-lg"></div>
+      )}
+      <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      {import.meta.env.DEV && (
+        <p class="text-xs text-primary-700 text-center max-w-xs relative z-10">{helpText}</p>
+      )}
+    </div>
+  )
+)}

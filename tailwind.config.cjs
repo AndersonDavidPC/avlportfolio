@@ -52,6 +52,9 @@ module.exports = {
         '18': '4.5rem',
         '22': '5.5rem',
       },
+      aspectRatio: {
+        phone: '9 / 19.5',
+      },
       animation: {
         'fade-in': 'fade-in 0.6s ease-out',
         'slide-up': 'slide-up 0.6s ease-out',

@@ -86,37 +86,65 @@
   "projects": [
     {
       "name": "Friction Drilling Calculator",
+      "slug": "friction-drilling-calculator",
+      "type": "mobile",
+      "visibility": "public",
       "org": "DrillSoft LLC",
       "description": "App móvil para cálculo de fricción en operaciones de perforación, con asistencia contextual mediante IA (API de Gemini).",
       "stack": ["React Native", "Expo", "TypeScript", "Gemini API"],
       "metrics": ["5.0★ en tiendas", "650+ descargas"],
+      "links": {
+        "appStore": "https://apps.apple.com/us/app/friction-drilling-calculator/id6740011503",
+        "playStore": "https://play.google.com/store/apps/details?id=com.drillsoft.frictioncal"
+      },
       "featured": true
     },
     {
       "name": "ECD Calculator",
+      "slug": "ecd-calculator",
+      "type": "mobile",
+      "visibility": "public",
       "org": "DrillSoft LLC",
       "description": "Calculadora de densidad equivalente de circulación (ECD) para operaciones MPD, con integración de agentes de IA.",
       "stack": ["React Native", "Expo", "TypeScript", "Gemini API"],
       "metrics": ["5.0★ en tiendas"],
+      "links": {
+        "appStore": "https://apps.apple.com/us/app/ecd-calculator/id6754762850",
+        "playStore": "https://play.google.com/store/apps/details?id=com.drillsoft.ecdcal"
+      },
       "featured": true
     },
     {
       "name": "MPD SmartCards",
+      "slug": "mpd-smartcards",
+      "type": "mobile",
+      "visibility": "public",
       "org": "DrillSoft LLC",
       "description": "App con contenido técnico premium para perforación a presión administrada, con suscripciones y compras integradas.",
       "stack": ["React Native", "Expo", "TypeScript", "RevenueCat", "react-native-iap"],
-      "metrics": ["155 usuarios activos mensuales"],
+      "metrics": ["5.0★ en tiendas", "5 Subscripciones activas"],
+      "links": {
+        "appStore": "https://apps.apple.com/us/app/mpd-smartcards/id6759011027",
+        "playStore": "https://play.google.com/store/apps/details?id=com.drillsoft.smartcards"
+      },
       "featured": true
     },
     {
-      "name": "Monitor IoT en tiempo real",
-      "org": "DrillSoft LLC",
-      "description": "Aplicación web que visualiza en tiempo real datos de sensores IoT durante operaciones MPD.",
-      "stack": ["Laravel", "WebSockets"],
+      "name": "CMS Biblioteca UFPS",
+      "slug": "cms-biblioteca-ufps",
+      "type": "web",
+      "visibility": "public",
+      "org": "UFPS · División de Biblioteca",
+      "description": "CMS adaptable y aplicaciones web institucionales para la División de Biblioteca de la UFPS, desplegados en un servidor Debian.",
+      "stack": ["Next.js", "Debian"],
+      "links": { "web": "https://biblioteca.ufps.edu.co/" },
       "featured": false
     },
     {
       "name": "Sirius",
+      "slug": "sirius",
+      "type": "web",
+      "visibility": "private",
       "org": "DrillSoft LLC",
       "description": "Módulos de gestión de unidades y gráficos de variables de pozo por profundidad y tiempo, con exportación de datos.",
       "stack": ["React", "Laravel"],
@@ -125,6 +153,9 @@
     },
     {
       "name": "Portafolio empresarial AVL Asesorías",
+      "slug": "avl-asesorias-web",
+      "type": "web",
+      "visibility": "public",
       "org": "AVL Asesorías",
       "description": "Sitio corporativo desarrollado desde cero para el emprendimiento de asesorías académicas.",
       "stack": ["Astro", "Tailwind CSS"],
