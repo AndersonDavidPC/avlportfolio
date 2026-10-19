@@ -1,0 +1,600 @@
+---
+import Analytics from "@vercel/analytics/astro";
+import '../styles/global.css';
+
+const whatsappBase = "https://wa.me/573223695520";
+
+const socialLinks = [
+  {
+    name: 'WhatsApp',
+    href: `${whatsappBase}?text=${encodeURIComponent('Hola AVL Asesorías, deseo solicitar información sobre sus servicios.')}`,
+    icon: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488',
+    color: 'hover:bg-[#25D366] hover:text-white',
+    ariaLabel: 'Escríbenos a WhatsApp'
+  },
+  {
+    name: 'Instagram',
+    href: 'https://instagram.com/avlasesorias',
+    icon: 'M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3z',
+    color: 'hover:bg-gradient-to-tr hover:from-amber-500 hover:via-rose-500 hover:to-purple-600 hover:text-white',
+    ariaLabel: 'Síguenos en Instagram'
+  },
+  {
+    name: 'TikTok',
+    href: 'https://www.tiktok.com/@avlasesorias',
+    icon: 'M412.19 118.66a109 109 0 0 1-9.45-5.5 133 133 0 0 1-24.27-20.62c-18.1-20.71-24.86-41.72-27.35-56.43h.1C349.14 23.9 350 16 350.13 16h-82.44v318.78c0 4.28 0 8.51-.18 12.69 0 .52-.05 1-.08 1.56 0 .23 0 .47-.05.71v.18a70 70 0 0 1-35.22 55.56 68.8 68.8 0 0 1-34.11 9c-38.41 0-69.54-31.32-69.54-70s31.13-70 69.54-70a68.9 68.9 0 0 1 21.41 3.39l.1-83.94a153.14 153.14 0 0 0-118 34.52 161.8 161.8 0 0 0-35.3 43.53c-3.48 6-16.61 30.11-18.2 69.24-1 22.21 5.67 45.22 8.85 54.73v.2c2 5.6 9.75 24.71 22.38 40.82A167.5 167.5 0 0 0 115 470.66v-.2l.2.2c39.91 27.12 84.16 25.34 84.16 25.34 7.66-.31 33.32 0 62.46-13.81 32.32-15.31 50.72-38.12 50.72-38.12a158.5 158.5 0 0 0 27.64-45.93c7.46-19.61 9.95-43.13 9.95-52.53V176.49c1 .6 14.32 9.41 14.32 9.41s19.19 12.3 49.13 20.31c21.48 5.7 50.42 6.9 50.42 6.9v-81.84c-10.14 1.1-30.73-2.1-51.81-12.61',
+    viewBox: '0 0 512 512',
+    color: 'hover:bg-neutral-900 hover:text-white',
+    ariaLabel: 'Síguenos en TikTok'
+  },
+  {
+    name: 'Facebook',
+    href: 'https://facebook.com/avlasesorias',
+    icon: 'M18.77 7.46H15.5v-1.9c0-.9.6-1.1 1-1.1h2.1V2.5h-2.9c-3.1 0-3.8 2.3-3.8 3.8v1.1H9.5v1.9h2.4v10.1h3.3V9.36h2.9l.37-1.9z',
+    color: 'hover:bg-[#1877F2] hover:text-white',
+    ariaLabel: 'Síguenos en Facebook'
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/avl-asesorias/',
+    icon: 'M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z',
+    color: 'hover:bg-[#0A66C2] hover:text-white',
+    ariaLabel: 'Conéctate en LinkedIn'
+  },
+  {
+    name: 'Web',
+    href: '/',
+    icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z',
+    color: 'hover:bg-primary-600 hover:text-white',
+    ariaLabel: 'Visitar sitio web oficial'
+  }
+];
+
+const schoolServices = [
+  {
+    title: 'Refuerzo Escolar y Tareas Dirigidas',
+    description: 'Acompañamiento integral para primaria y bachillerato, nivelación y hábitos de estudio.',
+    badge: 'Primaria & Bachillerato',
+    badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    whatsappMessage: 'Hola AVL Asesorías, necesito asesoría y refuerzo escolar para un estudiante de colegio/primaria.',
+    icon: 'M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z'
+  },
+  {
+    title: 'Matemáticas, Física y Química',
+    description: 'Álgebra, geometría, trigonometría, precálculo, física elemental y química general.',
+    badge: 'Materias Clave',
+    badgeColor: 'bg-blue-50 text-blue-700 border-blue-200',
+    whatsappMessage: 'Hola AVL Asesorías, me gustaría agendar una asesoría en matemáticas y ciencias para bachillerato.',
+    icon: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z'
+  },
+  {
+    title: 'Preparación Pruebas Saber 11° (ICFES)',
+    description: 'Simulacros evaluativos, estrategias de resolución rápida y repaso enfocado por componentes.',
+    badge: 'Pre-ICFES Intensivo',
+    badgeColor: 'bg-amber-50 text-amber-800 border-amber-200',
+    whatsappMessage: 'Hola AVL Asesorías, deseo información sobre la preparación para las Pruebas ICFES Saber 11°.',
+    icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z'
+  }
+];
+
+const universityServices = [
+  {
+    title: 'Cálculo, Álgebra e Ingenierías',
+    description: 'Cálculo diferencial/integral/multivariable, ecuaciones diferenciales, física mecánica y programación.',
+    badge: 'Ingenierías',
+    badgeColor: 'bg-primary-50 text-primary-800 border-primary-200',
+    whatsappMessage: 'Hola AVL Asesorías, requiero asesoría universitaria en materias de ingeniería/cálculo.',
+    icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z'
+  },
+  {
+    title: 'Preparación de Parciales y Finales',
+    description: 'Resolución de talleres, simulación de evaluaciones y sesiones intensivas previas a exámenes.',
+    badge: 'Alta Demanda',
+    badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
+    whatsappMessage: 'Hola AVL Asesorías, necesito apoyo urgente para preparar un examen parcial/final universitario.',
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+  },
+  {
+    title: 'Estadística y Ciencias Básicas',
+    description: 'Bioestadística, inferencia, métodos numéricos, química orgánica y análisis de laboratorio.',
+    badge: 'Ciencias Exactas',
+    badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
+    whatsappMessage: 'Hola AVL Asesorías, requiero apoyo en estadística / ciencias básicas universitarias.',
+    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+  }
+];
+
+const thesisServices = [
+  {
+    title: 'Asesoría Metodológica en Tesis y Grado',
+    description: 'Estructuración de anteproyecto, planteamiento del problema, objetivos, justificación y marco teórico.',
+    badge: 'Pregrado & Posgrado',
+    badgeColor: 'bg-primary-50 text-primary-800 border-primary-200',
+    whatsappMessage: 'Hola AVL Asesorías, necesito asesoría metodológica para mi proyecto de grado / tesis.',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'
+  },
+  {
+    title: 'Corrección de Estilo y Normas APA / IEEE',
+    description: 'Revisión ortotipográfica, redacción académica, citado riguroso, formatos institucionales y normas antiplagio.',
+    badge: 'Normas Académicas',
+    badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+    whatsappMessage: 'Hola AVL Asesorías, busco servicio de corrección de estilo y normas (APA/IEEE) para mi trabajo de grado.',
+    icon: 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
+  },
+  {
+    title: 'Análisis de Datos y Preparación de Sustentación',
+    description: 'Tratamiento cuantitativo/cualitativo, diapositivas profesionales de impacto y simulacro con jurados.',
+    badge: 'Defensa Final',
+    badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    whatsappMessage: 'Hola AVL Asesorías, necesito apoyo con el análisis de datos y preparación de mi sustentación de grado.',
+    icon: 'M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z'
+  }
+];
+
+const websiteLinks = [
+  {
+    title: 'Explorar Sitio Web Oficial',
+    subtitle: 'Conoce todos nuestros programas y metodologías',
+    href: '/',
+    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
+  },
+  {
+    title: 'Conoce Nuestro Equipo Profesional',
+    subtitle: 'Docentes e ingenieros egresados con experiencia',
+    href: '/nosotros',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+  },
+  {
+    title: 'Testimonios y Casos de Éxito',
+    subtitle: 'Calificaciones y opiniones reales de nuestros estudiantes',
+    href: '/testimonios',
+    icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
+  },
+  {
+    title: 'Nuestros Aliados Estratégicos',
+    subtitle: 'Empresas y organizaciones que respaldan nuestro trabajo',
+    href: '/aliados',
+    icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+  }
+];
+
+const generalWhatsAppUrl = `${whatsappBase}?text=${encodeURIComponent('Hola AVL Asesorías, quiero información general sobre sus asesorías académicas y disponibilidad.')}`;
+---
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>Enlaces y Asesorías Académicas | AVL Asesorías</title>
+    <meta name="title" content="Enlaces y Asesorías Académicas | AVL Asesorías" />
+    <meta name="description" content="Canales de contacto y asesorías académicas en Cúcuta y todo Colombia: colegio, bachillerato, universidad, cálculo y proyectos de grado / tesis." />
+    <link rel="canonical" href="https://avl-asesorias.com/linktree" />
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://avl-asesorias.com/linktree" />
+    <meta property="og:title" content="Enlaces Oficiales | AVL Asesorías" />
+    <meta property="og:description" content="Chatea por WhatsApp y cotiza tu asesoría académica: colegio, universidad y tesis." />
+    <meta property="og:image" content="https://avl-asesorias.com/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://avl-asesorias.com/linktree" />
+    <meta property="twitter:title" content="Enlaces Oficiales | AVL Asesorías" />
+    <meta property="twitter:description" content="Chatea por WhatsApp y cotiza tu asesoría académica." />
+    <meta property="twitter:image" content="https://avl-asesorias.com/og-image.jpg" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="theme-color" content="#2A5C8A" />
+
+    <Analytics />
+  </head>
+
+  <body class="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/20 to-neutral-100 text-neutral-800 antialiased flex flex-col justify-between selection:bg-primary-500 selection:text-white">
+    
+    <!-- Top discrete back link -->
+    <header class="w-full py-4 px-4">
+      <div class="max-w-md mx-auto flex items-center justify-between text-xs sm:text-sm text-neutral-600">
+        <a 
+          href="/" 
+          class="inline-flex items-center space-x-1.5 font-medium text-primary-700 hover:text-primary-900 bg-white/80 hover:bg-white px-3 py-1.5 rounded-full shadow-sm border border-neutral-200/80 transition-all duration-300 hover:scale-105"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span>Ir al sitio web principal</span>
+        </a>
+
+        <span class="inline-flex items-center space-x-1 text-emerald-700 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/70">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Asesores disponibles</span>
+        </span>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full flex-1 max-w-md mx-auto px-4 pb-12 pt-2">
+
+      <!-- Profile Header -->
+      <section class="text-center mb-6">
+        <div class="relative inline-block mb-3">
+          <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white p-3 shadow-xl border-4 border-white ring-4 ring-primary-500/20 mx-auto flex items-center justify-center transition-transform duration-300 hover:scale-105">
+            <img 
+              src="/favicon.svg" 
+              alt="Logo AVL Asesorías" 
+              class="w-full h-full object-contain"
+            />
+          </div>
+          <div class="absolute bottom-1 right-1 bg-primary-600 text-white p-1 rounded-full border-2 border-white shadow-sm" title="Cuenta Oficial Verificada">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight flex items-center justify-center gap-1.5">
+          <span>AVL Asesorías</span>
+          <svg class="w-5 h-5 text-primary-600 inline" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+        </h1>
+
+        <p class="text-sm font-semibold text-gradient mt-1">
+          Excelencia Académica y Mentorías Especializadas
+        </p>
+
+        <p class="text-xs sm:text-sm text-neutral-600 mt-2 max-w-xs mx-auto leading-relaxed">
+          Asesorías académicas personalizadas presenciales en <strong>Cúcuta</strong> y virtuales para toda <strong>Colombia 🇨🇴</strong>.
+        </p>
+
+        <!-- Trust Badges -->
+        <div class="flex flex-wrap items-center justify-center gap-1.5 mt-3">
+          <span class="inline-flex items-center text-[11px] font-medium bg-primary-100/70 text-primary-800 px-2.5 py-0.5 rounded-full border border-primary-200/50">
+            🎓 Docentes Expertos
+          </span>
+          <span class="inline-flex items-center text-[11px] font-medium bg-amber-100/70 text-amber-900 px-2.5 py-0.5 rounded-full border border-amber-200/50">
+            ⭐ 4.9/5 Calificación
+          </span>
+          <span class="inline-flex items-center text-[11px] font-medium bg-neutral-100 text-neutral-700 px-2.5 py-0.5 rounded-full border border-neutral-200">
+            📍 Cúcuta & Virtual
+          </span>
+        </div>
+      </section>
+
+      <!-- Quick Social Icons Bar -->
+      <section class="mb-6">
+        <div class="bg-white rounded-2xl p-2.5 shadow-sm border border-neutral-200/80 flex items-center justify-around">
+          {socialLinks.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`p-2.5 rounded-xl text-neutral-600 transition-all duration-300 hover-lift ${social.color}`}
+              aria-label={social.ariaLabel}
+            >
+              <svg class="w-5 h-5" viewBox={social.viewBox || "0 0 24 24"} fill="currentColor">
+                <path d={social.icon} />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Primary Featured High-Conversion CTA -->
+      <section class="mb-7">
+        <a
+          href={generalWhatsAppUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative block w-full p-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-700 text-white shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:shadow-emerald-600/35 transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] border border-emerald-400/30 overflow-hidden"
+        >
+          <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3.5">
+              <div class="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:rotate-6 transition-transform duration-300">
+                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+              </div>
+              <div class="text-left">
+                <span class="inline-block text-[11px] uppercase tracking-wider font-bold bg-white/20 text-emerald-100 px-2 py-0.5 rounded-full mb-0.5">
+                  Contacto Rápido
+                </span>
+                <h2 class="text-base sm:text-lg font-bold leading-tight">
+                  Chatear por WhatsApp
+                </h2>
+                <p class="text-xs text-emerald-100 leading-tight mt-0.5">
+                  Cotiza tu asesoría en minutos sin compromiso
+                </p>
+              </div>
+            </div>
+
+            <div class="pl-2">
+              <span class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </section>
+
+      <!-- Category 1: Primaria y Bachillerato -->
+      <section class="mb-7">
+        <div class="flex items-center space-x-2 mb-3 px-1">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-r from-primary-500 to-primary-700 flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold uppercase tracking-wide text-neutral-800">
+              Primaria y Bachillerato (Colegio)
+            </h2>
+            <p class="text-[11px] text-neutral-500">Refuerzo diario, nivelaciones y Saber 11°</p>
+          </div>
+        </div>
+
+        <div class="space-y-2.5">
+          {schoolServices.map((service) => (
+            <a
+              href={`${whatsappBase}?text=${encodeURIComponent(service.whatsappMessage)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group card p-3.5 block hover:border-primary-400 hover:shadow-md transition-all duration-300 hover:scale-[1.01]"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex items-start space-x-3">
+                  <div class="w-9 h-9 rounded-lg bg-primary-50 text-primary-700 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300 mt-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="flex items-center space-x-2">
+                      <h3 class="text-sm font-bold text-neutral-900 group-hover:text-primary-700 transition-colors">
+                        {service.title}
+                      </h3>
+                    </div>
+                    <p class="text-xs text-neutral-600 mt-0.5 leading-snug">
+                      {service.description}
+                    </p>
+                    <span class={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full border mt-1.5 ${service.badgeColor}`}>
+                      {service.badge}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all pl-2 pt-1 flex-shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Category 2: Asesorías Universitarias -->
+      <section class="mb-7">
+        <div class="flex items-center space-x-2 mb-3 px-1">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-r from-primary-500 to-primary-700 flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold uppercase tracking-wide text-neutral-800">
+              Asesorías Universitarias
+            </h2>
+            <p class="text-[11px] text-neutral-500">Ingenierías, ciencias exactas y exámenes parciales</p>
+          </div>
+        </div>
+
+        <div class="space-y-2.5">
+          {universityServices.map((service) => (
+            <a
+              href={`${whatsappBase}?text=${encodeURIComponent(service.whatsappMessage)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group card p-3.5 block hover:border-primary-400 hover:shadow-md transition-all duration-300 hover:scale-[1.01]"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex items-start space-x-3">
+                  <div class="w-9 h-9 rounded-lg bg-primary-50 text-primary-700 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300 mt-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-neutral-900 group-hover:text-primary-700 transition-colors">
+                      {service.title}
+                    </h3>
+                    <p class="text-xs text-neutral-600 mt-0.5 leading-snug">
+                      {service.description}
+                    </p>
+                    <span class={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full border mt-1.5 ${service.badgeColor}`}>
+                      {service.badge}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all pl-2 pt-1 flex-shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Category 3: Proyectos de Grado y Tesis -->
+      <section class="mb-7">
+        <div class="flex items-center space-x-2 mb-3 px-1">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-r from-primary-500 to-primary-700 flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold uppercase tracking-wide text-neutral-800">
+              Proyectos de Grado y Tesis
+            </h2>
+            <p class="text-[11px] text-neutral-500">Metodología, normas APA/IEEE y sustentación</p>
+          </div>
+        </div>
+
+        <div class="space-y-2.5">
+          {thesisServices.map((service) => (
+            <a
+              href={`${whatsappBase}?text=${encodeURIComponent(service.whatsappMessage)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group card p-3.5 block hover:border-primary-400 hover:shadow-md transition-all duration-300 hover:scale-[1.01]"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex items-start space-x-3">
+                  <div class="w-9 h-9 rounded-lg bg-primary-50 text-primary-700 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300 mt-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-neutral-900 group-hover:text-primary-700 transition-colors">
+                      {service.title}
+                    </h3>
+                    <p class="text-xs text-neutral-600 mt-0.5 leading-snug">
+                      {service.description}
+                    </p>
+                    <span class={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full border mt-1.5 ${service.badgeColor}`}>
+                      {service.badge}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all pl-2 pt-1 flex-shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Category 4: Conoce más en el Sitio Web Oficial -->
+      <section class="mb-8">
+        <div class="flex items-center space-x-2 mb-3 px-1">
+          <div class="w-7 h-7 rounded-lg bg-neutral-200 text-neutral-700 flex items-center justify-center flex-shrink-0 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold uppercase tracking-wide text-neutral-800">
+              Explorar el Sitio Web
+            </h2>
+            <p class="text-[11px] text-neutral-500">Conoce más sobre nuestra institución</p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          {websiteLinks.map((link) => (
+            <a
+              href={link.href}
+              class="group bg-white/90 hover:bg-white rounded-xl p-3 border border-neutral-200/90 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between hover:scale-[1.01]"
+            >
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-neutral-100 text-neutral-600 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-50 group-hover:text-primary-700 transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={link.icon} />
+                  </svg>
+                </div>
+                <div class="text-left">
+                  <h3 class="text-xs font-semibold text-neutral-800 group-hover:text-primary-700 transition-colors">
+                    {link.title}
+                  </h3>
+                  <p class="text-[11px] text-neutral-500">
+                    {link.subtitle}
+                  </p>
+                </div>
+              </div>
+
+              <div class="text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all pl-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Direct Contact Bar -->
+      <section class="bg-gradient-to-br from-primary-900 to-primary-950 text-white rounded-2xl p-4 shadow-lg text-center mb-6">
+        <h3 class="text-sm font-bold text-white mb-1">
+          ¿Prefieres llamarnos o escribirnos por correo?
+        </h3>
+        <p class="text-xs text-primary-200 mb-3">
+          Atención rápida de lunes a sábado
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-2 justify-center items-center text-xs">
+          <a 
+            href="tel:+573223695520" 
+            class="w-full sm:w-auto inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors border border-white/10 text-white font-medium"
+          >
+            <svg class="w-3.5 h-3.5 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            <span>+57 322 369 5520</span>
+          </a>
+
+          <a 
+            href="mailto:info@avlasesorias.com" 
+            class="w-full sm:w-auto inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors border border-white/10 text-white font-medium"
+          >
+            <svg class="w-3.5 h-3.5 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span>info@avlasesorias.com</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Minimal Bio-Links Footer -->
+    <footer class="w-full py-6 border-t border-neutral-200/60 bg-white/50 text-center text-xs text-neutral-500 space-y-2">
+      <div class="flex items-center justify-center space-x-1">
+        <img src="/favicon.svg" alt="AVL Asesorías" class="w-4 h-4 opacity-75" />
+        <span class="font-semibold text-neutral-700">AVL Asesorías</span>
+        <span>• Cúcuta, Colombia</span>
+      </div>
+      <p class="text-[11px] text-neutral-400">
+        © {new Date().getFullYear()} AVL Asesorías. Todos los derechos reservados.
+      </p>
+      <div class="flex justify-center space-x-3 text-[11px] text-neutral-500">
+        <a href="/privacidad" class="hover:underline hover:text-primary-700">Privacidad</a>
+        <span>•</span>
+        <a href="/terminos" class="hover:underline hover:text-primary-700">Términos</a>
+        <span>•</span>
+        <a href="/" class="hover:underline hover:text-primary-700">Sitio Principal</a>
+      </div>
+    </footer>
+
+  </body>
+</html>
